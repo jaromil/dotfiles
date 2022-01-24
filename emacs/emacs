@@ -1,0 +1,45 @@
+(load-theme 'misterioso)
+(cua-mode)
+(ivy-mode)
+(server-start)
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+(display-line-numbers-mode 1)
+(setq-default tab-width 8)
+(electric-indent-mode -1)
+(global-display-line-numbers-mode 1)
+(nyan-mode)
+(global-unset-key [(control x)(control z)])
+(global-set-key (kbd "C-.") 'helm-ag)
+(global-set-key (kbd "C-,") 'helm-ag-project-root)
+(global-set-key (kbd "C-x g") 'magit)
+(setq backup-directory-alist '(("." . "~/.emacs-backups")))
+
+; org-mode transparent encryption
+(epa-file-enable)
+(setq epa-armor t) ; armor in ascii for mobile-org compat
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(epa-file-name-regexp "\\(\\.gpg\\|\\.asc\\)\\(~\\|\\.~[0-9]+~\\)?\\'")
+ '(markdown-electric-backquote nil)
+ '(package-selected-packages
+   '(yaml-mode dockerfile-mode rust-mode meson-mode helm-ag smart-tabs-mode company-lua company-c-headers lua-mode nyan-mode tabbar smex session pod-mode pkg-info muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding flx find-file-in-project eproject diminish csv-mode counsel company color-theme-modern browse-kill-ring boxquote bm bar-cursor avy apache-mode)))
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
