@@ -20,14 +20,14 @@ setup: ## Setup dotfiles for the current user
 	$(call installdot,misc)
 
 install-zsh: ZSH := ${DOTFILES}/oh-my-zsh
-install-zsh: ## Install 
+install-zsh: ## Install oh-my-zsh
 	git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh ${ZSH}
 
-install-emacs:
+install-emacs: ## Install emacs packages
 	for i in $$(awk -v RS=' ' '{print $0}' install/emacs); do \
 		bash utils/emacs-pkg-install.sh $${i}; \
 	done
 
-install-vscode: ## Install all vscode extensions
+install-vscode: ## Install vscode extensions
 	for EXT in $$(cat install/vscode); do code --install-extension $$EXT; done
 
