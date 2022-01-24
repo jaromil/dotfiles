@@ -2,7 +2,7 @@
 
 alias reload="source ~/.bash_profile"
 alias _="sudo"
-alias g="git"
+alias g="git status"
 alias e='emacsclient -n'
 # alias rr="rm -rf"
 
