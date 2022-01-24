@@ -10,7 +10,7 @@ help: ## Display this help.
 install-apt: ## Install all distro packages on APT distros (needs root)
 	apt-get install -y --no-instal-recommends \
 	 zsh fzf tmux htop iotop suckless-tools \
-	 emacs-nox vim-nox git make
+	 vim-nox git software-properties-common apt-transport-https
 
 setup: ## Setup dotfiles for the current user
 	$(call installdot,shell)
@@ -28,6 +28,11 @@ install-emacs: ## Install emacs packages
 		bash utils/emacs-pkg-install.sh $${i}; \
 	done
 
-install-vscode: ## Install vscode extensions
-	for EXT in $$(cat install/vscode); do code --install-extension $$EXT; done
+install-vscode: ## Install vscode (needs root)
+	curl -sSL https://packages.microsoft.com/keys/microsoft.asc \
+	 | apt-key add -
+	echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
+	apt update -y && apt install code
 
+install-vscode-ext: ## Install vscode extensions
+	for EXT in $$(cat install/vscode); do code --install-extension $$EXT; done
