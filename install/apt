@@ -1,0 +1,2 @@
+apt-get install -y zsh fzf tmux htop iotop suckless-tools vim-nox git\
+ software-properties-common apt-transport-https jq
