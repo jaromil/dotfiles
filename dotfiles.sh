@@ -10,11 +10,11 @@ is_executable() {
 }
 
 if is_executable "git"; then
-  CMD="git clone $SOURCE $TARGET"
+  CMD="git clone -q $SOURCE $TARGET"
 elif is_executable "curl"; then
-  CMD="curl -#L $TARBALL | $TAR_CMD"
+  CMD="curl -#Ls $TARBALL | $TAR_CMD"
 elif is_executable "wget"; then
-  CMD="wget --no-check-certificate -O - $TARBALL | $TAR_CMD"
+  CMD="wget -q --no-check-certificate -O - $TARBALL | $TAR_CMD"
 fi
 
 if [ -z "$CMD" ]; then

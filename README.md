@@ -17,6 +17,9 @@ dotfiles:
 - ~/.zshrc
 - ~/.bash_profile
 - ~/.inputrc
+. ~/.emacs
+. ~/.vimrc
+. ~/.editorconfig
 
 To pimp your Zsh type `make install-zsh -C ~/.dotfiles` this will install
 oh-my-zsh with a nice prompt and a bunch of useful extensions and completion
