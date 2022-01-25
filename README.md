@@ -2,17 +2,38 @@
 
 Support both Zsh (and optionally oh-my-zsh) and Bash.
 
+Quick Install:
+
+```
+curl -L https://jaromil.dyne.org/dotfiles.sh | sh
+```
+
+Will install this into `~/.dotfiles`
+
+Type `make -C ~/.dotfiles` for a list of options.
+
+Do `make setup -C ~/.dotfiles` to activate, beware it will overwrite your
+dotfiles:
+- ~/.zshrc
+- ~/.bash_profile
+- ~/.inputrc
+
+To pimp your Zsh type `make install-zsh -C ~/.dotfiles` this will install
+oh-my-zsh with a nice prompt and a bunch of useful extensions and completion
+packages.
+
 ## Usage
 
 ```
-make <target>
+Usage:
+  make <target>
   help             Display this help.
   install-apt      Install all distro packages on APT distros (needs root)
   setup            Setup dotfiles for the current user
   install-zsh      Install oh-my-zsh
   install-emacs    Install emacs packages
-  install-vscode   Install vscode extensions
-
+  install-vscode   Install vscode (needs root)
+  install-vscode-ext  Install vscode extensions
 ```
 
 ## Layout
