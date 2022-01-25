@@ -23,5 +23,8 @@ else
   echo "Installing dotfiles..."
   mkdir -p "$TARGET"
   eval "$CMD"
+  echo "Installation succesful in ~/.dotfiles"
+  echo "to activate: cd ~/.dotfiles && make setup"
+  echo "type 'make' inside the dir for a list of commands."
 fi
 
