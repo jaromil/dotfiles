@@ -1,2 +1,14 @@
+#!/bin/sh
+
+echo "APT:Install-Recommends \"0\";" > /etc/apt/apt.conf.d/fucksuggested.conf
+echo "APT:Install-Suggests \"0\";"  >> /etc/apt/apt.conf.d/fucksuggested.conf
+
 apt-get install -y zsh fzf tmux htop iotop suckless-tools vim-nox git\
- software-properties-common apt-transport-https jq
+ software-properties-common apt-transport-https jq\
+ mtr-tiny nnn apt-file mlocate
+
+echo "Starting mlocate database update"
+updatedb
+
+echo "Starting apt-file update"
+apt-file update
