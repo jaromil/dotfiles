@@ -1,14 +1,20 @@
 #!/bin/sh
 
-echo "APT:Install-Recommends \"0\";" > /etc/apt/apt.conf.d/fucksuggested.conf
-echo "APT:Install-Suggests \"0\";"  >> /etc/apt/apt.conf.d/fucksuggested.conf
+username=${1}
+
+echo "Setting up apt packages"
+echo "APT:Install-Recommends \"0\";" | tee > /etc/apt/apt.conf.d/fucksuggested.conf
+echo "APT:Install-Suggests \"0\";"  | tee >> /etc/apt/apt.conf.d/fucksuggested.conf
 
 apt-get install -y zsh fzf tmux htop iotop suckless-tools vim-nox git\
  software-properties-common apt-transport-https jq\
- mtr-tiny nnn apt-file mlocate
+ mtr-tiny nnn apt-file mlocate doas
 
-echo "Starting mlocate database update"
-updatedb
+echo "Use doas instead of sudo, permit nopass"
+echo "permit nopass ${username}" > /etc/doas.conf
+if [ -r /usr/bin/sudo ]; then apt-get remove sudo; fi
 
-echo "Starting apt-file update"
-apt-file update
+echo "Starting mlocate and apt-file database updates in background"
+(updatedb ; apt-file update) &
+
+

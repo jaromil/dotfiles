@@ -4,11 +4,14 @@ DOTFILES ?= ${HOME}/.dotfiles
 
 installdot = for i in $$(ls ${1}/); do ln -sf ${DOTFILES}/${1}/$${i} ${HOME}/.$${i}; done
 
+# retrieve calling user, if not sudo then assumes /home/user/.dotfiles
+SUDO_USER ?= $(shell echo $(dir $(shell pwd)) | cut -d/ -f3 )
+
 help: ## Display this help.
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' Makefile
 
 install-apt: ## Install all distro packages on APT distros (needs root)
-	@sh install/apt
+	sh install/apt ${SUDO_USER}
 
 setup: ## Setup dotfiles for the current user
 	$(call installdot,shell)
