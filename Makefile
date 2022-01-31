@@ -2,7 +2,7 @@
 
 DOTFILES ?= ${HOME}/.dotfiles
 
-installdot = for i in $$(ls ${1}/); do ln -sf ${DOTFILES}/${1}/$${i} ${HOME}/.$${i}; done
+installdot = for i in $$(ls ${1}/); do if [ -r ${HOME}/.$${i} ]; then cp ${HOME}/.$${i} ${HOME}/.$${i}.bck; fi; ln -sf ${DOTFILES}/${1}/$${i} ${HOME}/.$${i}; done
 
 # retrieve calling user, if not sudo then assumes /home/user/.dotfiles
 SUDO_USER ?= $(shell echo $(dir $(shell pwd)) | cut -d/ -f3 )
