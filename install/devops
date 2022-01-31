@@ -1,32 +1,47 @@
-case $1 in
-	beowulf) DISTRO=buster ;;
-	chimaera) DISTRO=bullseye ;;
-	daedalus) DISTRO=bookworm ;;
+#!/bin/sh
+
+DISTRO=${DISTRO:-`lsb_release -cs`}
+APP=${APP:-all}
+
+case $DISTRO in
+	beowulf|bionic)  DISTRO=buster ;;
+	chimaera|focal)  DISTRO=bullseye ;;
+	daedalus|impish) DISTRO=bookworm ;;
 esac
+
 echo "Target distro: $DISTRO"
+echo "Target app: $APP"
+
+terraform() {
 echo
 echo "Install Terraform"
 keys=/usr/share/keyrings/hashicorp-archive-keyring.gpg
 if ! [ -r $keys ]; then curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o $keys; fi
 echo "deb [arch=$(dpkg --print-architecture) signed-by=$keys] https://apt.releases.hashicorp.com $DISTRO main" \
 	> /etc/apt/sources.list.d/terraform.list
+if ! [ "$APP" = "all" ]; then apt-get update -q -y && apt-get install -q -y terraform; fi
+}
 
+docker() {
 echo
-
 echo "Install Docker"
 keys=/usr/share/keyrings/docker-archive-keyring.gpg
 if ! [ -r $keys ]; then curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o $keys; fi
 echo "deb [arch=$(dpkg --print-architecture) signed-by=$keys] https://download.docker.com/linux/debian $DISTRO stable" \
 	> /etc/apt/sources.list.d/docker.list
+if ! [ "$APP" = "all" ]; then apt-get update -q -y && apt-get install -q -y docker-ce docker-ce-cli containerd.io; fi
+}
 
+kubectl() {
 echo
-
 echo "Install Kubectl"
 keys=/usr/share/keyrings/kubernetes-archive-keyring.gpg
 if ! [ -r $keys ]; then curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o $keys; fi
 echo "deb [arch=$(dpkg --print-architecture) signed-by=$keys] https://apt.kubernetes.io/ kubernetes-xenial main" \
 	> /etc/apt/sources.list.d/kubernetes.list
+if ! [ "$APP" = "all" ]; then apt-get update -q -y && apt-get install -q -y kubectl; fi
+}
 
-echo
-
-apt-get update -q -y && apt-get install -q -y terraform docker-ce docker-ce-cli containerd.io kubectl
+if [ "$APP" = "all" ]; then
+    apt-get update -q -y && apt-get install -q -y terraform docker-ce docker-ce-cli containerd.io kubectl
+fi
