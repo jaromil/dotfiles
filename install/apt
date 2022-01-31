@@ -12,7 +12,6 @@ apt-get install -y zsh fzf tmux htop iotop suckless-tools vim-nox git\
 
 echo "Use doas instead of sudo, permit nopass"
 echo "permit nopass ${username}" > /etc/doas.conf
-if [ -r /usr/bin/sudo ]; then apt-get remove sudo; fi
 
 echo "Starting mlocate and apt-file database updates in background"
 (updatedb ; apt-file update) &
