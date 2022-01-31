@@ -6,7 +6,7 @@ APP=${APP:-all}
 case $DISTRO in
 	beowulf|bionic)  DISTRO=buster ;;
 	chimaera|focal)  DISTRO=bullseye ;;
-	daedalus|impish) DISTRO=bookworm ;;
+	daedalus|impish) DISTRO=bullseye ;;  # bookworm ;;
 esac
 
 echo "Target distro: $DISTRO"
@@ -43,5 +43,10 @@ if ! [ "$APP" = "all" ]; then apt-get update -q -y && apt-get install -q -y kube
 }
 
 if [ "$APP" = "all" ]; then
+    terraform
+    docker
+    kubectl
     apt-get update -q -y && apt-get install -q -y terraform docker-ce docker-ce-cli containerd.io kubectl
+else
+    $APP
 fi
