@@ -6,7 +6,7 @@ git checkout release-0.6
 echo
 echo "Reminder! make sure deps are installed:"
 echo "gettext cmake (or dotfiles make install-devtools"
-echo [press enter to proceed] 
+echo [press enter to proceed]
 read
 make CMAKE_BUILD_TYPE=Release
 make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/local install
