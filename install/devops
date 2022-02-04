@@ -1,5 +1,7 @@
 #!/bin/sh
 
+apt-get -q -y --no-install-recommends install hcloud-cli
+
 DISTRO=${DISTRO:-`lsb_release -cs`}
 APP=${APP:-all}
 
