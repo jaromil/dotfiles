@@ -1,8 +1,7 @@
 #!/bin/sh
 
 # Shortcuts
-
-alias reload="source ~/.bash_profile"
+alias .f="cd $HOME/.dotfiles"
 alias _="sudo"
 alias g="git status"
 alias e='emacsclient -n'
