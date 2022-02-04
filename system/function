@@ -1,3 +1,4 @@
+#!/bin/sh
 # Switch long/short prompt
 
 ps0() {

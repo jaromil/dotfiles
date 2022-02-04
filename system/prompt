@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ## Prompt
 
 _bash_prompt_config() {
