@@ -133,6 +133,7 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 fi
 
 # Init oh-my-zsh
+save_aliases=$(alias -L)
 if [ -r $HOME/.dotfiles/oh-my-zsh/oh-my-zsh.sh ]; then
    export ZSH="$DOTFILES_DIR/oh-my-zsh"
    export ZSH_THEME=agkozak
@@ -150,6 +151,7 @@ if [ -r $HOME/.dotfiles/oh-my-zsh/oh-my-zsh.sh ]; then
    # maybe also: pip pipenv minikube npm nvm npx golang helm
    source $ZSH/oh-my-zsh.sh
 fi
+eval $save_aliases; unset save_aliases
 
 source ~/.zsh_local
 
