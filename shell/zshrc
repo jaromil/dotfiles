@@ -1,7 +1,7 @@
 # Jaromil's dotfiles
 # ZSH init
 
-. ~/.dotfiles/loader.sh
+source $HOME/.dotfiles/loader.sh
 
 # sets DOTFILES_DIR
 
