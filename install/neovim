@@ -1,0 +1,12 @@
+#!/bin/sh
+
+git clone https://github.com/neovim/neovim.git
+cd neovim
+git checkout release-0.6
+echo
+echo "Reminder! make sure deps are installed:"
+echo "gettext cmake (or dotfiles make install-devtools"
+echo [press enter to proceed] 
+read
+make CMAKE_BUILD_TYPE=Release
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/local install
