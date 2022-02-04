@@ -24,6 +24,9 @@ install-apt: ## Install base distro packages on APT distros (needs root)
 install-devops: ## Install devops tools: docker, terraform (needs root)
 	sh install/devops ${DISTRO}
 
+install-devtools: ## Install development tools: make, gcc, lua-dev.. (needs root)
+	sh install/devtools ${DISTRO}
+
 install-zsh: ZSH := ${DOTFILES}/oh-my-zsh
 install-zsh: ## Install oh-my-zsh
 	git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh ${ZSH}
