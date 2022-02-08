@@ -41,28 +41,35 @@ Usage:
 
 ## Layout
 ```
-├── bin              (my own executable scripts)
+.
+├── bin
+│   ├── adduser-remote
 │   ├── lnxrouter
 │   └── mladmin
-├── dotfiles.sh      (curl installer)
+├── dotfiles.sh
 ├── emacs
-│   └── emacs
+│   ├── emacs
+│   └── nyan-mode
 ├── git
 │   ├── gitconfig
 │   └── gitignore
-├── install          (packaged extensions)
+├── install
+│   ├── apt
+│   ├── devops
+│   ├── devtools
 │   ├── emacs
+│   ├── neovim
 │   └── vscode
-├── loader.sh        (common shell entrypoint)
+├── loader.sh
 ├── Makefile
 ├── misc
 │   └── editorconfig
-├── oh-my-zsh        (optionally cloned here)
+├── README.md
 ├── shell
 │   ├── bash_profile
 │   ├── inputrc
 │   └── zshrc
-├── system           (sourced by loader.sh)
+├── system
 │   ├── alias
 │   ├── dir_colors
 │   ├── env
@@ -74,10 +81,11 @@ Usage:
 │   ├── path
 │   └── prompt
 ├── utils
+│   ├── emacs-pkg-install.el
 │   └── emacs-pkg-install.sh
 ├── vim
 │   └── vimrc
 └── zsh
     ├── plugins
     └── themes
-
+```
