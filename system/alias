@@ -9,10 +9,10 @@ alias e='emacsclient -n'
 
 # Global aliases
 
-alias -g G="| grep -i"
-alias -g H="| head"
-alias -g T="| tail"
-alias -g L="| less"
+alias G="| grep -i"
+alias H="| head"
+alias T="| tail"
+alias L="| less"
 
 # List declared aliases, functions, paths
 
