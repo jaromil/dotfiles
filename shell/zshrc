@@ -146,7 +146,7 @@ if [ -r $HOME/.dotfiles/oh-my-zsh/oh-my-zsh.sh ]; then
    export HIST_STAMPS="dd.mm..yyyy"
    export ZSH_CUSTOM="$DOTFILES_DIR/zsh"
    plugins=(emacs git tmux vscode kubectl aws fzf zsh-history-substring-search)
-   plugins+=(zsh-interactive-cd ssh-agent tig rsync man helm cp debian)
+   plugins+=(zsh-interactive-cd tig rsync man helm cp debian)
    plugins+=(dirhistory docker ag)
    # maybe also: pip pipenv minikube npm nvm npx golang helm
    source $ZSH/oh-my-zsh.sh

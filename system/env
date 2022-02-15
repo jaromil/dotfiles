@@ -26,3 +26,8 @@ export LESS_TERMCAP_md="${yellow}";
 # Keep showing man page after exit
 
 export MANPAGER='less -X';
+
+# use the ssh-agent if running on the system
+if [ -r run/user/$UID/keyring/ssh ]; then
+	export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+fi
