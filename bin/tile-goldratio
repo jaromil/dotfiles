@@ -4,6 +4,10 @@
 # Copyleft (C) 2020-2021 by Jaromil
 #
 # usage: tile [ center | left | right | top ]
+if [ "$1" = "" ]; then
+	echo >&2 "usage: $(basename $0) [ center | left | right | top ]"
+	exit 1
+fi
 #
 # geometry of tiles:
 # ________________
