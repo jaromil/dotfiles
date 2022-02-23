@@ -33,6 +33,9 @@ install-devops: ## Install devops tools: docker, terraform (needs root)
 install-devtools: ## Install development tools: make, gcc, lua-dev.. (needs root)
 	sh install/devtools ${DISTRO}
 
+install-firewall: ## Install basic ufw firewall protection allowing only ssh
+	sh install/firewall
+
 install-zsh: ZSH := ${DOTFILES}/oh-my-zsh
 install-zsh: ## Install oh-my-zsh
 	git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh ${ZSH}
