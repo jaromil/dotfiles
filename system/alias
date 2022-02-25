@@ -14,6 +14,11 @@ alias H="| head"
 alias T="| tail"
 alias L="| less"
 
+# Useful aliases
+
+# kill all leftover mosh sessions excluding the current one
+alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
+
 # List declared aliases, functions, paths
 
 alias aliases="alias | sed 's/=.*//'"
