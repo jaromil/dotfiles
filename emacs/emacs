@@ -28,6 +28,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("a455366c5cdacebd8adaa99d50e37430b0170326e7640a688e9d9ad406e2edfd" "be5b03913a1aaa3709d731e1fcfd4f162db6ca512df9196c8d4693538fa50b86" default))
  '(epa-file-name-regexp "\\(\\.gpg\\|\\.asc\\)\\(~\\|\\.~[0-9]+~\\)?\\'")
  '(markdown-electric-backquote nil)
  '(package-selected-packages
