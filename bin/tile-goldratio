@@ -48,7 +48,7 @@ cxo=`calc "( $W - $cw ) / 2"`
 # center height
 ch=`calc "( $H / 2.5 ) * 1.6"`
 # center y origin
-cyo=`calc "( $H - $ch ) / 2"`
+cyo=`calc "( $H - $ch ) / 3"`
 # echo "$cw x $ch at x$cxo y$cyo"
 case "$1" in
     center)
