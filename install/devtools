@@ -1,6 +1,7 @@
 #!/bin/sh
 
 apt-get install -y -q --no-install-recommends \
-	gettext meson ninja-build cmake gcc autoconf automake libtool \
-	luajit lua5.1 libluajit-5.1-dev liblua5.1-0-dev luarocks
+	gettext meson ninja-build cmake gcc autoconf automake libtool libtool-bin \
+	luajit lua5.1 libluajit-5.1-dev liblua5.1-0-dev luarocks editorconfig \
+	pkg-config
 
