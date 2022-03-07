@@ -47,6 +47,11 @@ install-emacs: ## Install emacs packages
 		bash utils/emacs-pkg-install.sh $${i}; \
 	done
 
+install-neovim: ## Install neovim and plugins
+	sh install/neovim
+	if [ -d ${HOME}/.config/nvim ]; then mv ${HOME}/.config/nvim ${HOME}/.config/nvim.bck; fi
+	ln -s ${DOTFILES}/vim/nvim ${HOME}/.config/
+
 install-vscode: ## Install vscode (needs root)
 	curl -sSL https://packages.microsoft.com/keys/microsoft.asc \
 	 | apt-key add -

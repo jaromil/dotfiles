@@ -9,4 +9,7 @@ echo "gettext cmake (or dotfiles make install-devtools"
 echo [press enter to proceed]
 read
 make CMAKE_BUILD_TYPE=Release
-make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/local install
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.dotfiles install
+ln -s ~/.config/nvim $HOME/.dotfiles/vim/nvim
+mkdir -p ~/.local/share/nvim/site
+ln -s ~/.local/share/nvim/site/autoload $HOME/.dotfiles/vim/nvim/autoload

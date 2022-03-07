@@ -1,2 +1,9 @@
 oh-my-zsh
 
+
+# neovim
+lib
+share
+neovim
+bin/nvim
+
