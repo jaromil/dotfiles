@@ -2,6 +2,10 @@
 
 # Shortcuts
 alias .f="cd $HOME/.dotfiles"
+alias .nvim="nvim $HOME/.dotfiles/vim/nvim/init.vim"
+alias .alias="nvim $HOME/.dotfiles/system/alias"
+alias .path="nvim $HOME/.dotfiles/system/path"
+alias .env="nvim $HOME/.dotfiles/system/env"
 alias _="sudo"
 alias g="git status"
 alias e='emacsclient -n'

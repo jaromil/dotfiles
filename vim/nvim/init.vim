@@ -15,11 +15,11 @@ call plug#begin('~/.vim/plugged')
 "------------------------ THEME ------------------------
 " Plug 'dikiaap/minimalist'
 Plug 'tpope/vim-sensible'
-" Plug 'preservim/nerdtree'
-" nnoremap <leader>n :NERDTreeFocus<CR>
-" nnoremap <C-n> :NERDTree<CR>
-" nnoremap <C-t> :NERDTreeToggle<CR>
-" nnoremap <C-f> :NERDTreeFind<CR>
+Plug 'preservim/nerdtree'
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-t> :NERDTree<CR>
+nnoremap <C-s> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-repeat'
@@ -27,11 +27,14 @@ Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'feline-nvim/feline.nvim'
+
 call plug#end()
 " == VIMPLUG END ================================
 
 " set background=dark
 " colorscheme minimalist
+colorscheme elflord
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -48,6 +51,12 @@ nnoremap <M-h> <c-w>h
 nnoremap <M-j> <c-w>j
 nnoremap <M-k> <c-w>k
 nnoremap <M-l> <c-w>l
+
+" split a'la emacs
+nnoremap <C-x>2 :split<CR>
+nnoremap <C-x>3 :vsplit<CR>
+
+
 " Terminal mode
 if has('nvim')
   tnoremap <M-h> <c-\><c-n><c-w>h
