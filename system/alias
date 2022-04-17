@@ -11,6 +11,11 @@ alias g="git status"
 alias e='emacsclient -n'
 # alias rr="rm -rf"
 
+if [ -r ~/.dotfiles/bin/nvim ]; then
+alias vi='nvim'
+alias vim='nvm'
+fi
+
 # Global aliases
 
 alias G="| grep -i"

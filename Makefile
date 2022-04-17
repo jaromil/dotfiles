@@ -24,7 +24,7 @@ setup: ## Setup dotfiles for the current user
 	@$(call installdot,misc)
 	@touch ${HOME}/.zsh_local
 
-install: setup install-apt install-firewall install-zsh ## Base setup and install of APT rules, firewall and Zsh
+install: setup install-apt ## Base setup and install of APT rules
 
 install-apt: ## Install base distro packages on APT distros (needs root)
 	sh install/apt ${SUDO_USER}

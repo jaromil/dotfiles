@@ -8,10 +8,10 @@ echo "APT:Install-Suggests \"0\";"  | tee >> /etc/apt/apt.conf.d/fucksuggested.c
 
 apt-get install -y zsh fzf tmux htop iotop suckless-tools vim-nox git tig\
  software-properties-common apt-transport-https jq\
- mtr-tiny nnn apt-file mlocate doas pwgen silversearcher-ag
+ mtr-tiny nnn apt-file mlocate pwgen silversearcher-ag
 
-echo "Use doas instead of sudo, permit nopass"
-echo "permit nopass ${username}" > /etc/doas.conf
+# echo "Use doas instead of sudo, permit nopass"
+# echo "permit nopass ${username}" > /etc/doas.conf
 
 echo "Starting mlocate and apt-file database updates in background"
 (updatedb ; apt-file update) &
