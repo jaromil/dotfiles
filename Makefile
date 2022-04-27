@@ -43,9 +43,7 @@ install-zsh: ## Install oh-my-zsh
 	git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh ${ZSH}
 
 install-emacs: ## Install emacs packages
-	for i in $$(awk -v RS=' ' '{print $0}' install/emacs); do \
-		bash utils/emacs-pkg-install.sh $${i}; \
-	done
+	sh install/emacs
 
 install-neovim: ## Install neovim and plugins
 	sh install/neovim
