@@ -15,6 +15,9 @@ if [ -d "$DOTFILES_EXTRA_DIR" ]; then
   done
 fi
 
+# private commands
+export HISTCONTROL=ignorespace
+
 # Clean up
 
 unset CURRENT_SCRIPT SCRIPT_PATH DOTFILE EXTRAFILE

@@ -19,6 +19,7 @@ setopt extended_history # better history
 setopt glob_star_short # ** means **/*, **/ means directory only **
 setopt hist_expire_dups_first # don't fill your history as quickly with junk
 setopt hist_ignore_space # ` command` doesn't save to history
+setopt histignorespace # ` command` doesn't save to history
 setopt hist_subst_pattern # better globs / parameter expansion
 setopt hist_reduce_blanks # `a  b` normalizes to `a b` in history
 setopt hist_verify # reduce oops I sudoed the wrong thing
@@ -146,8 +147,8 @@ if [ -r $HOME/.dotfiles/oh-my-zsh/oh-my-zsh.sh ]; then
    export DISABLE_UNTRACKED_FILES_DIRTY="true"
    export HIST_STAMPS="dd.mm..yyyy"
    export ZSH_CUSTOM="$DOTFILES_DIR/zsh"
-   plugins=(emacs git tmux vscode kubectl aws fzf zsh-history-substring-search)
-   plugins+=(zsh-interactive-cd tig rsync man helm cp debian)
+   plugins=(emacs git tmux vscode fzf zsh-history-substring-search)
+   plugins+=(zsh-interactive-cd tig rsync man cp debian)
    plugins+=(dirhistory docker ag)
    # maybe also: pip pipenv minikube npm nvm npx golang helm
    source $ZSH/oh-my-zsh.sh
