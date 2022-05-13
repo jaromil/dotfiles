@@ -5,7 +5,7 @@
 (menu-bar-mode -1)
 ;; (toggle-scroll-bar -1)
 ;; (tool-bar-mode -1)
-(display-line-numbers-mode 1)
+;; (display-line-numbers-mode 1)
 (setq-default tab-width 8)
 (electric-indent-mode -1)
 (global-display-line-numbers-mode 1)

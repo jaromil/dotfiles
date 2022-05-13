@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set b off
+
 ## Prompt
 
 _bash_prompt_config() {
