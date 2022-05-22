@@ -40,10 +40,11 @@ LS_COLORS='--color -G'
 LS_TIMESTYLEISO='--time-style=long-iso'
 LS_GROUPDIRSFIRST='--group-directories-first'
 
-alias l="ls -lahA $LS_COLORS $LS_TIMESTYLEISO $LS_GROUPDIRSFIRST"
-alias ll="ls -lA $LS_COLORS"
-alias lt="ls -lhAtr $LS_COLORS $LS_TIMESTYLEISO $LS_GROUPDIRSFIRST"
-alias ld="ls -ld $LS_COLORS */"
+alias ls="ls -rt $LS_COLORS"
+alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
+alias ll="ls -lrtA $LS_COLORS"
+alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
+alias ld="ls -lrtd $LS_COLORS */"
 alias lp="stat -c '%a %n' *"
 
 unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
