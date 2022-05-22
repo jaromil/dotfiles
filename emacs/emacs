@@ -8,15 +8,15 @@
 ;; (display-line-numbers-mode 1)
 (setq-default tab-width 8)
 (electric-indent-mode -1)
-(global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode -1)
 
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/nyan-mode"))
 (require 'nyan-mode)
 (nyan-mode 1)
 
 (global-unset-key [(control x)(control z)])
-(global-set-key (kbd "C-.") 'helm-ag)
-(global-set-key (kbd "C-,") 'helm-ag-project-root)
+;; (global-set-key (kbd "C-.") 'helm-ag)
+(global-set-key (kbd "M-,") 'helm-ag-project-root)
 (global-set-key (kbd "C-x g") 'magit)
 (setq backup-directory-alist '(("." . "~/.emacs-backups")))
 
