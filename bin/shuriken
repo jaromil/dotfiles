@@ -1,0 +1,35 @@
+#!/bin/bash
+
+username="${1}"
+keyfile="$HOME/.ssh/pubkeys/${username}.pub"
+
+if [[ ! -r ${keyfile} ]]; then
+	echo "Public key file not found: ~/.ssh/pubkeys/${1}.pub"
+	exit 1
+fi
+
+
+cat <<EOF
+if ! test "\$(id -u)" = "0"; then
+    echo "[shuriken] --------------------------------"
+    echo "[shuriken] cannot add ssh key for $username"
+    echo "[shuriken] you must be root."
+    echo "[shuriken] --------------------------------"
+else
+
+if ! test -r  /home/$username; then
+    useradd -m $username
+fi
+mkdir -p /home/$username/.ssh
+if ! test -r /home/$username/.ssh/authorized_keys; then
+    touch /home/$username/.ssh/authorized_keys
+fi
+cat <<EOFF >> /home/$username/.ssh/authorized_keys
+$(cat $keyfile)
+EOFF
+chmod -R go-rwx /home/$username/.ssh
+chown -R $username:$username /home/$username/.ssh
+
+fi
+EOF
+
