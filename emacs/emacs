@@ -17,6 +17,7 @@
 (global-unset-key [(control x)(control z)])
 ;; (global-set-key (kbd "C-.") 'helm-ag)
 (global-set-key (kbd "M-,") 'helm-ag-project-root)
+(global-set-key (kbd "M-.") 'helm-ag)
 (global-set-key (kbd "C-x g") 'magit)
 (setq backup-directory-alist '(("." . "~/.emacs-backups")))
 
