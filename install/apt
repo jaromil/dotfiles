@@ -7,7 +7,7 @@ echo "APT:Install-Recommends \"0\";" | tee > /etc/apt/apt.conf.d/fucksuggested.c
 echo "APT:Install-Suggests \"0\";"  | tee >> /etc/apt/apt.conf.d/fucksuggested.conf
 
 apt-get install -y zsh fzf tmux htop iotop suckless-tools vim-nox git tig\
- software-properties-common apt-transport-https jq\
+ software-properties-common apt-transport-https jq mosh\
  mtr-tiny nnn apt-file mlocate pwgen silversearcher-ag
 
 # echo "Use doas instead of sudo, permit nopass"
