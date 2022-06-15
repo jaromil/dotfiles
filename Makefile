@@ -40,7 +40,8 @@ install-firewall: ## Install basic ufw firewall protection allowing only ssh
 
 install-zsh: ZSH := ${DOTFILES}/oh-my-zsh
 install-zsh: ## Install oh-my-zsh
-	git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh ${ZSH}
+	@if [ $(shell id -u) = 0 ]; then echo "make install-zsh is not meant to be run as root"; \
+		else git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh ${ZSH}; fi
 
 install-emacs: ## Install emacs packages
 	sh install/emacs
