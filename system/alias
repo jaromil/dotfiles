@@ -7,7 +7,7 @@ alias .alias="nvim $HOME/.dotfiles/system/alias"
 alias .path="nvim $HOME/.dotfiles/system/path"
 alias .env="nvim $HOME/.dotfiles/system/env"
 alias _="sudo"
-alias g="git status"
+alias g="git status --untracked-files=no"
 alias e='emacsclient -n'
 # alias rr="rm -rf"
 
