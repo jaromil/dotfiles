@@ -18,6 +18,9 @@ unset CURRENT_SCRIPT SCRIPT_PATH DOTFILE
 
 export DOTFILES_DIR
 
+# load direnv
+eval "$(direnv hook bash)"
+
 # Case-insensitive globbing (used in pathname expansion)
 
 shopt -s nocaseglob

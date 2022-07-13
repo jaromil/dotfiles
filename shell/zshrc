@@ -134,6 +134,9 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle-line-finish() { echoti rmkx }; zle -N zle-line-finish
 fi
 
+# use direnv to load .envrc from folders
+eval "$(direnv hook zsh)"
+
 # Init oh-my-zsh
 save_aliases=$(alias -L)
 if [ -r $HOME/.dotfiles/oh-my-zsh/oh-my-zsh.sh ]; then
@@ -147,7 +150,7 @@ if [ -r $HOME/.dotfiles/oh-my-zsh/oh-my-zsh.sh ]; then
    export DISABLE_UNTRACKED_FILES_DIRTY="true"
    export HIST_STAMPS="dd.mm..yyyy"
    export ZSH_CUSTOM="$DOTFILES_DIR/zsh"
-   plugins=(emacs git tmux vscode fzf zsh-history-substring-search)
+   plugins=(git tmux vscode fzf zsh-history-substring-search)
    plugins+=(zsh-interactive-cd tig rsync man cp debian)
    plugins+=(dirhistory docker ag)
    # maybe also: pip pipenv minikube npm nvm npx golang helm
