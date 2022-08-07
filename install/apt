@@ -3,8 +3,10 @@
 username=${1}
 
 echo "Setting up apt packages"
-echo "APT:Install-Recommends \"0\";" | tee > /etc/apt/apt.conf.d/fucksuggested.conf
-echo "APT:Install-Suggests \"0\";"  | tee >> /etc/apt/apt.conf.d/fucksuggested.conf
+cat << EOF > /etc/apt/apt.conf.d/fucksuggested.conf
+APT::Get::Install-Recommends "false";
+APT::Get::Install-Suggests "false";
+EOF
 
 apt-get install -y zsh fzf tmux htop iotop suckless-tools vim-nox git tig\
  software-properties-common apt-transport-https jq mosh direnv\
