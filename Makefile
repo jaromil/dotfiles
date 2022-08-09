@@ -59,3 +59,6 @@ install-vscode: ## Install vscode (needs root)
 
 install-vscode-ext: ## Install vscode extensions
 	for EXT in $$(cat install/vscode); do code --install-extension $$EXT; done
+
+install-latex: ## Install latex tools
+	sh install/latex
