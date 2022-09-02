@@ -46,18 +46,18 @@ install-zsh: ## Install oh-my-zsh
 install-emacs: ## Install emacs packages
 	sh install/emacs
 
-install-neovim: ## Install neovim and plugins
+install-neovim: # Install neovim and plugins
 	sh install/neovim
 	if [ -d ${HOME}/.config/nvim ]; then mv ${HOME}/.config/nvim ${HOME}/.config/nvim.bck; fi
 	ln -s ${DOTFILES}/vim/nvim ${HOME}/.config/
 
-install-vscode: ## Install vscode (needs root)
+install-vscode: # Install vscode (needs root)
 	curl -sSL https://packages.microsoft.com/keys/microsoft.asc \
 	 | apt-key add -
 	echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
 	apt update -y && apt install code
 
-install-vscode-ext: ## Install vscode extensions
+install-vscode-ext: # Install vscode extensions
 	for EXT in $$(cat install/vscode); do code --install-extension $$EXT; done
 
 install-latex: ## Install latex tools
