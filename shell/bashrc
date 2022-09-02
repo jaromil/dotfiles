@@ -47,3 +47,7 @@ shopt -s no_empty_cmd_completion
 # update the values of LINES and COLUMNS.
 
 shopt -s checkwinsize
+
+# This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
