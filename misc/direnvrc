@@ -1,0 +1,10 @@
+use_nvm() {
+    NODE_VERSION="$1"
+    type nvm >/dev/null 2>&1 || . ~/.config/nvm/nvm.sh
+    nvm use "$NODE_VERSION"
+    tmp=`mktemp`
+    npm completion > $tmp
+    . $tmp
+    rm $tmp
+}
+
