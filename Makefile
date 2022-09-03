@@ -62,3 +62,6 @@ install-vscode-ext: # Install vscode extensions
 
 install-latex: ## Install latex tools
 	sh install/latex
+
+install-nodejs: ## Install nodejs tools
+	sh install/nodejs
