@@ -8,3 +8,7 @@ use_nvm() {
     rm $tmp
 }
 
+# cat README.nfo in each dir 
+use_readme() {
+    if [ -r README.nfo ]; then more README.nfo; fi
+}
