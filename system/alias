@@ -2,6 +2,9 @@
 
 # Shortcuts
 alias .f="cd $HOME/.dotfiles"
+alias .o="cd $HOME/OneDrive"
+alias .s="cd $HOME/OneDrive/Shell"
+alias .d="cd $HOME/OneDrive/Documents"
 alias .nvim="nvim $HOME/.dotfiles/vim/nvim/init.vim"
 alias .alias="nvim $HOME/.dotfiles/system/alias"
 alias .path="nvim $HOME/.dotfiles/system/path"
