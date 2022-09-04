@@ -1,10 +1,6 @@
 # Source the dotfiles (order matters)
 . ${HOME}/.dotfiles/loader.sh
 
-# Set LSCOLORS
-
-eval "$(dircolors -b "$DOTFILES_DIR"/system/dir_colors)"
-
 # Hook for extra/custom stuff
 
 # private commands

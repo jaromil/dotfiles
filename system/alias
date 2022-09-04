@@ -1,23 +1,17 @@
 #!/bin/sh
 
 # Shortcuts
+if command -v vim > /dev/null; then alias vi='vim'; fi
+
 alias .f="cd $HOME/.dotfiles"
 alias .o="cd $HOME/OneDrive"
 alias .s="cd $HOME/OneDrive/Shell"
 alias .d="cd $HOME/OneDrive/Documents"
-alias .nvim="nvim $HOME/.dotfiles/vim/nvim/init.vim"
-alias .alias="nvim $HOME/.dotfiles/system/alias"
-alias .path="nvim $HOME/.dotfiles/system/path"
-alias .env="nvim $HOME/.dotfiles/system/env"
-alias _="sudo"
+alias .alias="vi $HOME/.dotfiles/system/alias"
+alias .path="vi $HOME/.dotfiles/system/path"
+alias .env="vi $HOME/.dotfiles/system/env"
 alias g="git status --untracked-files=no"
 alias e='emacsclient -n'
-# alias rr="rm -rf"
-
-if [ -r ~/.dotfiles/bin/nvim ]; then
-alias vi='nvim'
-alias vim='nvm'
-fi
 
 # Global aliases
 
@@ -28,29 +22,29 @@ alias L="| less"
 
 # Useful aliases
 
-# kill all leftover mosh sessions excluding the current one
-alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
-
 # List declared aliases, functions, paths
 
 alias aliases="alias | sed 's/=.*//'"
 alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
 alias paths='echo -e ${PATH//:/\\n}'
 
+if [ "`uname -s`" != "OpenBSD" ]; then
+# kill all leftover mosh sessions excluding the current one
+alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
 # Directory listing/traversal
-
 LS_COLORS='--color -G'
 LS_TIMESTYLEISO='--time-style=long-iso'
 LS_GROUPDIRSFIRST='--group-directories-first'
-
 alias ls="ls -rt $LS_COLORS"
 alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
 alias ll="ls -lrtA $LS_COLORS"
 alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
 alias ld="ls -lrtd $LS_COLORS */"
 alias lp="stat -c '%a %n' *"
-
 unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
+# Network
+alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+fi
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -58,11 +52,6 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"                  # Go to previous dir with -
 alias cd.='cd $(readlink -f .)'    # Go to real dir (i.e. if current dir is linked)
-
-# Network
-
-alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
-alias hosts="sudo $EDITOR /etc/hosts"
 
 # Request using GET, POST, etc. method
 

@@ -17,5 +17,6 @@ done
 . ${DOTFILES_DIR}/shell/inputrc
 
 # Set LSCOLORS
-
-eval "$(dircolors -b "$DOTFILES_DIR"/system/dir_colors)"
+if [ "`uname -s`" != "OpenBSD" ]; then
+  eval "$(dircolors -b "$DOTFILES_DIR"/system/dir_colors)"
+fi
