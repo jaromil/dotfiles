@@ -1,6 +1,6 @@
 #!/bin/sh
 
-apt-get install emacs-nox elpa-ivy elpa-monokai-theme elpa-yaml-mode elpa-dockerfile-mode elpa-rust-mode elpa-meson-mode elpa-helm-ag elpa-lua-mode elpa-smex elpa-pkg-info elpa-muttrc-mode elpa-markdown-mode elpa-htmlize elpa-graphviz-dot-mode elpa-folding elpa-flx elpa-flx-ido elpa-diminish elpa-csv-mode elpa-color-theme-modern elpa-browse-kill-ring elpa-bar-cursor elpa-avy elpa-org elpa-helm-org elpa-imenu-list pandoc
+apt-get install emacs-nox elpa-ivy elpa-monokai-theme elpa-yaml-mode elpa-dockerfile-mode elpa-rust-mode elpa-meson-mode elpa-helm-ag elpa-lua-mode elpa-smex elpa-pkg-info elpa-muttrc-mode elpa-markdown-mode elpa-htmlize elpa-graphviz-dot-mode elpa-folding elpa-flx elpa-flx-ido elpa-diminish elpa-csv-mode elpa-color-theme-modern elpa-browse-kill-ring elpa-bar-cursor elpa-avy elpa-org elpa-helm-org elpa-imenu-list pandoc elpa-ws-butler
 
 
 # yaml-mode dockerfile-mode rust-mode meson-mode helm-ag smart-tabs-mode company-lua company-c-headers lua-mode nyan-mode tabbar smex session pod-mode pkg-info muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding flx find-file-in-project eproject diminish csv-mode counsel company color-theme-modern browse-kill-ring boxquote bm bar-cursor avy apache-mode

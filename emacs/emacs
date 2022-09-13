@@ -1,4 +1,3 @@
-(load-theme 'monokai t)
 (cua-mode)
 (ivy-mode)
 (server-start)
@@ -6,34 +5,54 @@
 ;; (toggle-scroll-bar -1)
 ;; (tool-bar-mode -1)
 ;; (display-line-numbers-mode 1)
-(setq-default tab-width 8)
+(setq-default tab-width 4)
 (electric-indent-mode -1)
 (global-display-line-numbers-mode -1)
 
-(add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/nyan-mode"))
-(require 'nyan-mode)
-(nyan-mode 1)
+;; helm setup
+
+(add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
+(require 'helm-swoop)
+(setq helm-multi-swoop-edit-save t)
+(setq helm-swoop-split-with-multiple-windows nil)
+(setq helm-swoop-split-direction 'split-window-vertically) ;;  'split-window-horizontally
+(setq helm-swoop-speed-or-color t) ;; nil is faster
+(setq helm-swoop-move-to-line-cycle t)
+(setq helm-swoop-use-line-number-face t)
+(setq helm-swoop-use-fuzzy-match t)
+(require 'helm-flx)
+(setq helm-flx-for-helm-find-files t ;; t by default
+      helm-flx-for-helm-locate t) ;; nil by default
+
+;; (nyan-mode 1)
 
 (global-unset-key [(control x)(control z)])
-;; (global-set-key (kbd "C-.") 'helm-ag)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-i") 'helm-imenu)
 (global-set-key (kbd "M-,") 'helm-ag-project-root)
 (global-set-key (kbd "M-.") 'helm-ag)
 (global-set-key (kbd "C-x g") 'magit)
-(setq backup-directory-alist '(("." . "~/.emacs-backups")))
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-o") 'helm-occur)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-s") 'helm-swoop)
+(global-set-key (kbd "C-S") 'helm-multi-swoop-all)
+;; because I'm sloppy
+(global-set-key (kbd "C-f") 'helm-find-files)
+(global-set-key (kbd "C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "M-s M-s") 'helm-occur)
+
+
 
 ; org-mode transparent encryption
 (epa-file-enable)
 (setq epa-armor t) ; armor in ascii for mobile-org compat
 
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 ;; separate custom confs in .emacs.d/custom.el
-(load (expand-file-name "~/.emacs.d/custom.el") :noerror)
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives '("milkbox" . "http://melpa.milkbox.net/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)
-
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file) (load custom-file :noerror))
+;; local confs in .emacs.d/local.el
+(setq local-file (expand-file-name "local.el" user-emacs-directory))
+(when (file-exists-p local-file) (load local-file :noerror))
