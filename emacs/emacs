@@ -24,17 +24,9 @@
 ; org-mode transparent encryption
 (epa-file-enable)
 (setq epa-armor t) ; armor in ascii for mobile-org compat
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("a455366c5cdacebd8adaa99d50e37430b0170326e7640a688e9d9ad406e2edfd" "be5b03913a1aaa3709d731e1fcfd4f162db6ca512df9196c8d4693538fa50b86" default))
- '(epa-file-name-regexp "\\(\\.gpg\\|\\.asc\\)\\(~\\|\\.~[0-9]+~\\)?\\'")
- '(markdown-electric-backquote nil)
- '(package-selected-packages
-   '(hcl-mode magit yaml-mode dockerfile-mode rust-mode meson-mode helm-ag smart-tabs-mode company-lua company-c-headers lua-mode nyan-mode tabbar smex session pod-mode pkg-info muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding flx find-file-in-project eproject diminish csv-mode counsel company color-theme-modern browse-kill-ring boxquote bm bar-cursor avy apache-mode)))
+
+;; separate custom confs in .emacs.d/custom.el
+(load (expand-file-name "~/.emacs.d/custom.el") :noerror)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -45,12 +37,3 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-;; (load "~/.emacs_local")
