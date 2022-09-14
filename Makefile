@@ -20,8 +20,8 @@ setup: ## Setup dotfiles for the current user
 	@$(call installdot,shell)
 	@$(call installdot,git)
 	@$(call installdot,vim)
-	@$(call installdot,emacs)
 	@$(call installdot,misc)
+	@ln -sf ${DOTFILES}/emacs/emacs ${HOME}/.emacs
 	@touch ${HOME}/.zsh_local
 
 install: setup install-apt ## Base setup and install of APT rules

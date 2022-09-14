@@ -1,3 +1,5 @@
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.dotfiles/emacs/themes/"))
+(load-theme 'nord t nil)
 (cua-mode)
 (ivy-mode)
 (server-start)
@@ -10,7 +12,6 @@
 (global-display-line-numbers-mode -1)
 
 ;; helm setup
-
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
 (require 'helm-swoop)
 (setq helm-multi-swoop-edit-save t)
