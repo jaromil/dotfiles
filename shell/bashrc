@@ -47,6 +47,24 @@ shopt -s checkwinsize
 # This loads nvm bash_completion
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
+arrow=$'\u25B6'
+c_gray='\033[01;30m'
+c_blue='\033[0;34m'
+cyan='\033[0;36m'
+reset='\033[0m'
+
+printf "${arrow} ${cyan}Welcome to ${reset}`hostname`"
+echo
+
+ps axf | grep [t]mux > /dev/null
+if [ $? == 0 ] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    printf "${arrow} ${cyan}TMUX running sessions:${reset}\n"
+    tmux ls
+    echo
 fi
+
+printf "${arrow} ${cyan}System `uptime -p`${reset}\n"
+echo
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#   exec tmux
+# fi
