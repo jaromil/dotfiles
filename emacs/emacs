@@ -21,6 +21,10 @@
 (setq helm-swoop-move-to-line-cycle t)
 (setq helm-swoop-use-line-number-face t)
 (setq helm-swoop-use-fuzzy-match t)
+;; Always use the previous search
+(setq helm-swoop-pre-input-function
+      (lambda () (if (boundp 'helm-swoop-pattern)
+                     helm-swoop-pattern "")))
 (require 'helm-flx)
 (setq helm-flx-for-helm-find-files t ;; t by default
       helm-flx-for-helm-locate t) ;; nil by default
@@ -56,3 +60,20 @@
 ;; local confs in .emacs.d/local.el
 (setq local-file (expand-file-name "local.el" user-emacs-directory))
 (when (file-exists-p local-file) (load local-file :noerror))
+
+;; spelling using hunspell (libreoffice engine)
+(with-eval-after-load "ispell"
+  (setenv "LANG" "en_US.UTF-8")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "en_GB")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "en_GB")
+  ;; For saving words to the personal dictionary, don't infer it from
+  ;; the locale, otherwise it would save to ~/.hunspell_de_DE.
+  (setq ispell-personal-dictionary
+		(expand-file-name "hunspell_personal" user-emacs-directory))
+  ;; The personal dictionary file has to exist, otherwise hunspell will
+  ;; silently not use it.
+  (unless (file-exists-p ispell-personal-dictionary)
+	(write-region "" nil ispell-personal-dictionary nil 0))
+  )
