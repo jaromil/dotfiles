@@ -1,6 +1,8 @@
 # Jaromil's dotfiles
 
-Support both Zsh (and optionally oh-my-zsh) and Bash.
+This setup support both Bash and Zsh (and optionally oh-my-zsh) setups.
+
+My current daily driver is bash and is therefore more maintained.
 
 Quick Install:
 
@@ -21,35 +23,53 @@ dotfiles:
 . ~/.vimrc
 . ~/.editorconfig
 
-To pimp your Zsh type `make install-zsh -C ~/.dotfiles` this will install
-oh-my-zsh with a nice prompt and a bunch of useful extensions and completion
-packages.
-
 ## Usage
 
 ```
 Usage:
   make <target>
   help             Display this help.
-  install-apt      Install all distro packages on APT distros (needs root)
   setup            Setup dotfiles for the current user
+  install          Base setup and install of APT rules
+  install-apt      Install base distro packages on APT distros (needs root)
+  install-devops   Install devops tools: docker, terraform (needs root)
+  install-devtools  Install development tools: make, gcc, lua-dev.. (needs root)
+  install-firewall  Install basic ufw firewall protection allowing only ssh
   install-zsh      Install oh-my-zsh
   install-emacs    Install emacs packages
-  install-vscode   Install vscode (needs root)
-  install-vscode-ext  Install vscode extensions
+  install-latex    Install latex tools
+  install-nodejs   Install nodejs tools
 ```
 
 ## Layout
+
+At shell startup the loader.sh is sourced to load all scripts in `system/` and then the shell specific one in `shell/`.
+
+The `install/` dir contains a bunch of collections of packages that can be quickly installed for makefile depending on the purpose for which the shell is used.
+
+
+
+
+
 ```
 .
 ├── bin
 │   ├── adduser-remote
+│   ├── hcloud-datacenters
 │   ├── lnxrouter
-│   └── mladmin
+│   ├── mladmin
+│   ├── rd-rm-results
+│   ├── readme
+│   ├── shuriken
+│   ├── tile-goldratio
+│   └── torrent-serve
 ├── dotfiles.sh
 ├── emacs
 │   ├── emacs
-│   └── nyan-mode
+│   ├── helm-flx.el
+│   ├── helm-swoop.el
+│   ├── nyan-mode
+│   └── themes
 ├── git
 │   ├── gitconfig
 │   └── gitignore
@@ -58,21 +78,28 @@ Usage:
 │   ├── devops
 │   ├── devtools
 │   ├── emacs
+│   ├── firewall
+│   ├── latex
 │   ├── neovim
+│   ├── nodejs
 │   └── vscode
 ├── loader.sh
 ├── Makefile
 ├── misc
-│   └── editorconfig
+│   ├── direnvrc
+│   ├── editorconfig
+│   ├── nord-tmux
+│   └── tmux.conf
 ├── README.md
 ├── shell
-│   ├── bash_profile
+│   ├── bashrc
 │   ├── inputrc
 │   └── zshrc
 ├── system
 │   ├── alias
 │   ├── dir_colors
 │   ├── env
+│   ├── extensions
 │   ├── function
 │   ├── function_fs
 │   ├── function_network
@@ -80,10 +107,8 @@ Usage:
 │   ├── grep
 │   ├── path
 │   └── prompt
-├── utils
-│   ├── emacs-pkg-install.el
-│   └── emacs-pkg-install.sh
 ├── vim
+│   ├── nvim
 │   └── vimrc
 └── zsh
     ├── plugins
