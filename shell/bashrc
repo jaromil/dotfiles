@@ -53,17 +53,26 @@ c_blue='\033[0;34m'
 cyan='\033[0;36m'
 reset='\033[0m'
 
-printf "${arrow} ${cyan}Welcome to ${reset}`hostname`"
+system=`uname -s`
+
+printf "${arrow} ${cyan}Welcome to ${reset}`hostname -s` ($system)"
 echo
 
-ps axf | grep [t]mux > /dev/null
+if [[ "$system" == Linux ]]; then
+ps axf | grep '[t]mux' > /dev/null
 if [ $? == 0 ] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
     printf "${arrow} ${cyan}TMUX running sessions:${reset}\n"
     tmux ls
     echo
 fi
+fi
 
-printf "${arrow} ${cyan}System `uptime -p`${reset}\n"
+if [[ "$system" =~ Linux ]]; then
+    printf "${arrow} ${cyan}System `uptime -p`${reset}\n"
+else
+    printf "${arrow} ${cyan}System `uptime`${reset}\n"
+fi
+
 echo
 
 if command -v tmux &> /dev/null && [ -r "$HOME/.tmux_startup" ] && [ -n "$PS1" ] \
