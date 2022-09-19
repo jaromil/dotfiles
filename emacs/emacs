@@ -11,12 +11,17 @@
 (electric-indent-mode -1)
 (global-display-line-numbers-mode -1)
 
-;; helm setup
+(setq copyright-year-ranges t)
+
+;; Helm setup
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
+
+(setq split-window-threshold 110)
 (require 'helm-swoop)
 (setq helm-multi-swoop-edit-save t)
 (setq helm-swoop-split-with-multiple-windows nil)
 (setq helm-swoop-split-direction 'split-window-vertically) ;;  'split-window-horizontally
+(setq helm-imenu-split-direction 'split-window-vertically) ;;  'split-window-
 (setq helm-swoop-speed-or-color t) ;; nil is faster
 (setq helm-swoop-move-to-line-cycle t)
 (setq helm-swoop-use-line-number-face t)
@@ -46,8 +51,9 @@
 (global-set-key (kbd "C-f") 'helm-find-files)
 (global-set-key (kbd "C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "M-p") 'helm-buffers-list) ;; right hand easy
 
-
+(global-unset-key (kbd "M-c")) ;; sloppy and not useful
 
 ; org-mode transparent encryption
 (epa-file-enable)
