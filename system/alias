@@ -13,6 +13,8 @@ alias .env="vi $HOME/.dotfiles/system/env"
 alias g="git status --untracked-files=no"
 alias e='emacsclient -n'
 
+alias .f-install-tmux="touch $HOME/.tmux_startup"
+
 # Global aliases
 
 alias G="| grep -i"
