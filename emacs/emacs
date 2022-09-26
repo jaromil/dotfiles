@@ -17,12 +17,16 @@
 
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
 
+;; automatic whitespace trimming in programming modes
+(add-hook 'prog-mode-hook #'ws-butler-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
 ;; nyan-mode looks better in X
 ;; (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/nyan-mode"))
 ;; (require 'nyan-mode)
 ;; (nyan-mode 1)
 
-;; Helm setup
+;; helm setup
 (require 'helm-swoop)
 (setq helm-multi-swoop-edit-save t)
 (setq helm-swoop-split-with-multiple-windows nil)
@@ -53,8 +57,9 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-s") 'helm-swoop)
 (global-set-key (kbd "M-s M-s") 'helm-multi-swoop-all)
+
 ;; because I'm sloppy
-(global-set-key (kbd "C-f") 'helm-find-files)
+(global-set-key (kbd "C-o") 'helm-find-files)
 (global-set-key (kbd "C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "M-p") 'helm-buffers-list) ;; right hand easy
