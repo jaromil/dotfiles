@@ -6,18 +6,23 @@
 (menu-bar-mode -1)
 ;; (toggle-scroll-bar -1)
 ;; (tool-bar-mode -1)
-;; (display-line-numbers-mode 1)
+;; (display-line-numbers-mode 
+(setq vc-follow-symlinks t)
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq-default tab-width 4)
 (electric-indent-mode -1)
 (global-display-line-numbers-mode -1)
-
+(setq split-window-threshold 110)
 (setq copyright-year-ranges t)
 
-;; Helm setup
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
 
-(setq split-window-threshold 110)
+;; nyan-mode looks better in X
+;; (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/nyan-mode"))
+;; (require 'nyan-mode)
+;; (nyan-mode 1)
+
+;; Helm setup
 (require 'helm-swoop)
 (setq helm-multi-swoop-edit-save t)
 (setq helm-swoop-split-with-multiple-windows nil)
@@ -36,8 +41,6 @@
       helm-flx-for-helm-locate t) ;; nil by default
 
 (require 'go-mode)
-
-;; (nyan-mode 1)
 
 (global-unset-key [(control x)(control z)])
 (global-set-key (kbd "M-x") 'helm-M-x)
