@@ -1,6 +1,14 @@
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.dotfiles/emacs/themes/"))
+(add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
 ;; (load-theme 'nord t nil)
-(load-theme 'doom-monokai-spectrum t nil) ; -Iosvkem
+(require 'doom-themes)
+(setq doom-themes-enable-bold t      ; if nil, bold is universally disabled
+      doom-themes-enable-italic nil) ; if nil, italics is universally disabled
+(load-theme 'doom-monokai-spectrum t nil)
+;; (doom-themes-visual-bell-config)
+;; Enable custom neotree theme
+;; (doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+
 (cua-mode)
 (ivy-mode)
 (server-start)
@@ -16,14 +24,15 @@
 (setq split-window-threshold 110)
 (setq copyright-year-ranges t)
 
-(add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
 
 ;; automatic whitespace trimming in programming modes
 (add-hook 'prog-mode-hook #'ws-butler-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (require 'mood-line)
-(add-to-list 'global-mode-string '(" %I"))
+(add-to-list 'global-mode-string '(" 🐬"))
+(add-to-list 'global-mode-string '("💾%I"))
+(mood-line-mode)
 
 ;; nyan-mode looks better in X
 ;; (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/nyan-mode"))

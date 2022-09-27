@@ -8,7 +8,9 @@ apt-get install emacs-nox elpa-ivy elpa-monokai-theme elpa-yaml-mode \
 		elpa-diminish elpa-csv-mode elpa-color-theme-modern \
 		elpa-browse-kill-ring elpa-bar-cursor elpa-avy elpa-org \
 		elpa-helm-org elpa-imenu-list pandoc elpa-ws-butler \
-		elpa-darkroom elpa-doom-themes
+		elpa-anzu
+
+# only found in ubuntu:		elpa-darkroom elpa-doom-themes
 
 
 # yaml-mode dockerfile-mode rust-mode meson-mode helm-ag smart-tabs-mode company-lua company-c-headers lua-mode nyan-mode tabbar smex session pod-mode pkg-info muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding flx find-file-in-project eproject diminish csv-mode counsel company color-theme-modern browse-kill-ring boxquote bm bar-cursor avy apache-mode
