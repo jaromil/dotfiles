@@ -1,6 +1,6 @@
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.dotfiles/emacs/themes/"))
 ;; (load-theme 'nord t nil)
-(load-theme 'doom-Iosvkem t nil)
+(load-theme 'doom-monokai-spectrum t nil) ; -Iosvkem
 (cua-mode)
 (ivy-mode)
 (server-start)
@@ -23,6 +23,8 @@
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (require 'mood-line)
+(add-to-list 'global-mode-string '(" %I"))
+
 ;; nyan-mode looks better in X
 ;; (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/nyan-mode"))
 ;; (require 'nyan-mode)
