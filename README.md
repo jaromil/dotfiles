@@ -41,6 +41,44 @@ Usage:
   install-nodejs   Install nodejs tools
 ```
 
+## Emacs
+
+Core packages to be installed from ELPA: `ivy helm`
+
+Handy install script on APT systems: `make install-emacs`
+
+The setup uses helm heavily (even swoop in place of find-file) supports golang and has support for spell-checker hunspell and english grammar-checker grammarly.
+
+Keys are remapped for my confort as follows:
+
+```elisp
+
+(global-unset-key [(control x)(control z)])
+(global-set-key (kbd "M-x") 'helm-M-x)
+;; M-l in qwerty is soft on right hand and I use it also in tmux
+(global-set-key (kbd "M-l") 'helm-M-x) ;; this overrides an ugly lowercase hotkey
+(global-set-key (kbd "M-k") 'kill-buffer) ;; I'm not using it to delete lower block
+(global-set-key (kbd "M-i") 'helm-imenu)
+(global-set-key (kbd "M-,") 'helm-ag-project-root)
+(global-set-key (kbd "M-.") 'helm-ag)
+(global-set-key (kbd "C-x g") 'magit)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "M-o") 'helm-occur)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-s") 'helm-swoop)
+(global-set-key (kbd "M-s M-s") 'helm-multi-swoop-all)
+
+;; because I'm sloppy
+(global-set-key (kbd "C-o") 'helm-find-files)
+(global-set-key (kbd "C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "M-p") 'helm-buffers-list) ;; right ha
+
+(global-unset-key (kbd "M-c")) ;; sloppy and not useful
+
+```
+
+
 ## Layout
 
 At shell startup the loader.sh is sourced to load all scripts in `system/` and then the shell specific one in `shell/`.
