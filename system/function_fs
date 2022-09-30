@@ -1,5 +1,18 @@
 #!/bin/sh
 
+# When in WSL find our username on windows host
+winuser() {
+	if ! [ -d /mnt/c/Users ]; then return; fi
+	cd /mnt/c/Users \
+		&& /mnt/c/Windows/System32/cmd.exe /c echo %username% \
+			| tr -d '\r'
+	cd - > /dev/null
+}
+
+winhome() {
+	echo "/mnt/c/Users/`winuser`"
+}
+
 # Create a new directory and enter it
 
 mk() {

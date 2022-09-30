@@ -65,3 +65,6 @@ install-latex: ## Install latex tools
 
 install-nodejs: ## Install nodejs tools
 	sh install/nodejs
+
+install-winhost: ## Copy WSL dotfiles to the Windows host user dir
+	. install/winhost
