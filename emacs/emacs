@@ -1,6 +1,7 @@
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.dotfiles/emacs/themes/"))
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
-;; (load-theme 'nord t nil)
+(set-face-attribute 'default nil :font "Hack")
+
 (require 'doom-themes)
 (setq doom-themes-enable-bold t      ; if nil, bold is universally disabled
       doom-themes-enable-italic nil) ; if nil, italics is universally disabled
