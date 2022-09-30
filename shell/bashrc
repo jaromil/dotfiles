@@ -44,6 +44,7 @@ shopt -s no_empty_cmd_completion
 
 shopt -s checkwinsize
 
+
 # This loads nvm bash_completion
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
@@ -55,27 +56,28 @@ reset='\033[0m'
 
 system=`uname -s`
 
-printf "${arrow} ${cyan}Welcome to ${reset}`hostname -s` ($system)"
-echo
+>&2 printf "${arrow} ${cyan}Welcome to ${reset}`hostname -s` ($system)"
+>&2 echo
 
 if [[ "$system" == Linux ]]; then
 ps axf | grep '[t]mux' > /dev/null
 if [ $? == 0 ] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    printf "${arrow} ${cyan}TMUX running sessions:${reset}\n"
-    tmux ls
-    echo
+    >&2 printf "${arrow} ${cyan}TMUX running sessions:${reset}\n"
+    >&2 tmux ls
+    >&2 echo
 fi
 fi
 
 if [[ "$system" =~ Linux ]]; then
-    printf "${arrow} ${cyan}System `uptime -p`${reset}\n"
+    >&2 printf "${arrow} ${cyan}System `uptime -p`${reset}\n"
 else
-    printf "${arrow} ${cyan}System `uptime`${reset}\n"
+    >&2 printf "${arrow} ${cyan}System `uptime`${reset}\n"
 fi
 
-echo
+>&2 echo
 
 if command -v tmux &> /dev/null && [ -r "$HOME/.tmux_startup" ] && [ -n "$PS1" ] \
-       && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+       && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] \
+       && [[ "$SSH_TTY" != "" ]]; then
     exec tmux
 fi
