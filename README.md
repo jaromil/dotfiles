@@ -1,8 +1,6 @@
 # Jaromil's dotfiles
 
-This setup support both Bash and Zsh (and optionally oh-my-zsh) setups.
-
-My current daily driver is bash and is therefore more maintained.
+This setup is based on the Bash shell and includes configurations for git, emacs, vim, direnv. In addition there is also a set of handy shell scripts and a level of integration with WSL host (Windows Subsystem for Linux).
 
 Quick Install:
 
@@ -10,18 +8,17 @@ Quick Install:
 curl -L https://jaromil.dyne.org/dotfiles.sh | sh
 ```
 
-Will install this into `~/.dotfiles`
+Will install into `~/.dotfiles`
 
-Type `make -C ~/.dotfiles` for a list of options.
+Go inside this directory and type `make` for a list of options.
 
-Do `make setup -C ~/.dotfiles` to activate, beware it will overwrite your
-dotfiles:
-- ~/.zshrc
-- ~/.bash_profile
-- ~/.inputrc
-. ~/.emacs
-. ~/.vimrc
-. ~/.editorconfig
+Do `make setup` to activate, beware it will overwrite some dotfiles:
+- ~/.gitconfig && ~/.gitignore
+- ~/.bashrc && ~/.inputrc
+- ~/.emacs && ~/.vimrc
+- ~/.editorconfig
+- ~/.signature
+- ~/.direnvrc
 
 ## Usage
 
@@ -31,15 +28,29 @@ Usage:
   help             Display this help.
   setup            Setup dotfiles for the current user
   install          Base setup and install of APT rules
-  install-apt      Install base distro packages on APT distros (needs root)
-  install-devops   Install devops tools: docker, terraform (needs root)
-  install-devtools  Install development tools: make, gcc, lua-dev.. (needs root)
+  install-apt      Install base distro packages on APT distros (*)
+  install-devops   Install devops tools: docker, terraform (*)
+  install-devtools  Install development tools: make, gcc, lua-dev.. (*)
   install-firewall  Install basic ufw firewall protection allowing only ssh
-  install-zsh      Install oh-my-zsh
-  install-emacs    Install emacs packages
-  install-latex    Install latex tools
+  install-emacs    Install emacs packages (*)
+  install-latex    Install latex packages (*)
   install-nodejs   Install nodejs tools
+  install-winhost  Copy WSL dotfiles to the Windows host user dir
+
+(*) = needs root
 ```
+
+## Shell scripts
+
+- tile-goldratio :: minimal windowmanager tiling script using wmctl
+- rd-rm-results :: rdfind helper to remove duplicate hits in results.txt
+- lnxrouter :: shell script to activate NAT masq from current host
+- adduser-remote :: generates script to quickly add a user and ssh key
+- mladmin :: quickly opens the admin panel of a dyne.org mailinglist
+- hcloud-datacenters :: list all hetzner datacenters for hcloud-cli
+- torrent-serve :: serve files in current directory for LAN streaming
+- .f-install-readme :: install direnv README.nfo in current dir
+- .f-install-nvm :: install a NodeVM setup in current dir
 
 ## Emacs
 
@@ -83,10 +94,7 @@ Keys are remapped for my confort as follows:
 
 At shell startup the loader.sh is sourced to load all scripts in `system/` and then the shell specific one in `shell/`.
 
-The `install/` dir contains a bunch of collections of packages that can be quickly installed for makefile depending on the purpose for which the shell is used.
-
-
-
+The `install/` dir contains collections of package install scripts.
 
 
 ```
@@ -97,17 +105,26 @@ The `install/` dir contains a bunch of collections of packages that can be quick
 │   ├── lnxrouter
 │   ├── mladmin
 │   ├── rd-rm-results
-│   ├── readme
 │   ├── shuriken
 │   ├── tile-goldratio
 │   └── torrent-serve
 ├── dotfiles.sh
 ├── emacs
+│   ├── doom-themes-base.el
+│   ├── doom-themes.el
 │   ├── emacs
+│   ├── flycheck-grammarly.el
+│   ├── go-mode.el
+│   ├── grammarly.el
 │   ├── helm-flx.el
 │   ├── helm-swoop.el
+│   ├── mood-line.el
 │   ├── nyan-mode
-│   └── themes
+│   ├── rainbow-delimiters.el
+│   ├── request-deferred.el
+│   ├── request.el
+│   ├── themes
+│   └── ws-butler.el
 ├── git
 │   ├── gitconfig
 │   └── gitignore
@@ -120,13 +137,15 @@ The `install/` dir contains a bunch of collections of packages that can be quick
 │   ├── latex
 │   ├── neovim
 │   ├── nodejs
-│   └── vscode
+│   ├── vscode
+│   └── winhost
 ├── loader.sh
 ├── Makefile
 ├── misc
 │   ├── direnvrc
 │   ├── editorconfig
 │   ├── nord-tmux
+│   ├── signature
 │   └── tmux.conf
 ├── README.md
 ├── shell
@@ -143,12 +162,11 @@ The `install/` dir contains a bunch of collections of packages that can be quick
 │   ├── function_network
 │   ├── function_text
 │   ├── grep
+│   ├── onedrive
 │   ├── path
-│   └── prompt
-├── vim
-│   ├── nvim
-│   └── vimrc
-└── zsh
-    ├── plugins
-    └── themes
+│   ├── prompt
+│   └── startmenu
+└── vim
+    ├── nvim
+    └── vimrc 
 ```
