@@ -14,7 +14,7 @@ if [ -r /usr/share/doc/fzf/examples/key-bindings.bash ]; then
   export FZF_COMPLETION_TRIGGER='~~'
   export FZF_COMPLETION_OPTS='--border --info=inline'
   . /usr/share/doc/fzf/examples/key-bindings.bash
-  . /usr/share/doc/fzf/examples/completion.bash
+  . $HOME/.dotfiles/completions/fzf
 else
   bind '"\e[A": history-substring-search-backward'
   bind '"\e[B": history-substring-search-forward'
