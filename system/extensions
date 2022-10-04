@@ -3,3 +3,19 @@
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
 
+if command -v fd; then
+  export FZF_DEFAULT_COMMAND='fd --type file --color=always'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS="--ansi"
+fi
+
+if [ -r /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+  export FZF_ALT_C_OPTS="--preview 'tree -L 2 -C {} | head -200'"
+  export FZF_COMPLETION_TRIGGER='~~'
+  export FZF_COMPLETION_OPTS='--border --info=inline'
+  . /usr/share/doc/fzf/examples/key-bindings.bash
+  . /usr/share/bash-completion/completions/fzf
+else
+  bind '"\e[A": history-substring-search-backward'
+  bind '"\e[B": history-substring-search-forward'
+fi
