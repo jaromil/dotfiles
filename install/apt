@@ -13,7 +13,7 @@ EOF
 
 apt-get install -y -q zsh fzf tmux htop iotop suckless-tools vim-nox git tig\
  software-properties-common apt-transport-https jq mosh direnv\
- mtr-tiny nnn apt-file mlocate pwgen silversearcher-ag liblnk-utils
+ mtr-tiny nnn apt-file mlocate pwgen silversearcher-ag liblnk-utils vbetool
 
 # echo "Use doas instead of sudo, permit nopass"
 # echo "permit nopass ${username}" > /etc/doas.conf
