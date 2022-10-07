@@ -1,0 +1,14 @@
+
+# proc=`uname -p`
+# arch="generic"
+
+# case $proc in
+# 	x86_64) arch=amd64 ;;
+# 	*) echo "arch $arch" ; exit 1 ;;
+# esac
+
+# apt-get install linux-headers-$arch
+
+apt-get install -q -y linux-headers-generic
+apt-get install -q -y zfs-dkms 
+apt-get install -q -y zfsutils-linux
