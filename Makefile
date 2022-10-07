@@ -26,19 +26,22 @@ setup: ## Setup dotfiles for the current user
 
 install: setup install-apt ## Base setup and install of APT rules
 
-install-apt: ## Install base distro packages on APT distros (needs root)
+update-apt:
+	apt-get update -q -y
+
+install-apt: update-apt ## Install base distro packages on APT distros (needs root)
 	sh install/apt ${SUDO_USER}
 
 install-devops: ## Install devops tools: docker, terraform (needs root)
 	sh install/devops ${DISTRO}
 
-install-devtools: ## Install development tools: make, gcc, lua-dev.. (needs root)
+install-devtools: update-apt ## Install development tools: make, gcc, lua-dev.. (needs root)
 	sh install/devtools ${DISTRO}
 
-install-firewall: ## Install basic ufw firewall protection allowing only ssh
+install-firewall: update-apt ## Install basic ufw firewall protection allowing only ssh
 	sh install/firewall
 
-install-emacs: ## Install emacs packages
+install-emacs: update-apt ## Install emacs packages
 	sh install/emacs
 
 install-neovim: # Install neovim and plugins
@@ -55,7 +58,7 @@ install-vscode: # Install vscode (needs root)
 install-vscode-ext: # Install vscode extensions
 	for EXT in $$(cat install/vscode); do code --install-extension $$EXT; done
 
-install-latex: ## Install latex tools
+install-latex: update-apt ## Install latex tools
 	sh install/latex
 
 install-nodejs: ## Install nodejs tools
@@ -63,3 +66,6 @@ install-nodejs: ## Install nodejs tools
 
 install-winhost: ## Copy WSL dotfiles to the Windows host user dir
 	. install/winhost
+
+install-zfs: update-apt ## Install ZFS
+	sh install/zfs
