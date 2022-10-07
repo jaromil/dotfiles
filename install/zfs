@@ -9,6 +9,13 @@
 
 # apt-get install linux-headers-$arch
 
-apt-get install -q -y linux-headers-generic
-apt-get install -q -y zfs-dkms 
-apt-get install -q -y zfsutils-linux
+cat << EOF
+On Devuan make sure to have backports:
+
+deb http://deb.debian.org/debian bullseye-backports main contrib
+deb-src http://deb.debian.org/debian bullseye-backports main contrib
+EOF
+
+
+apt-get install -q -y dpkg-dev linux-headers-generic linux-image-generic
+DEBIAN_FRONTEND=noninteractive apt-get install -q -y zfs-dkms zfsutils-linux
