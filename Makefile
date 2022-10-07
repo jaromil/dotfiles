@@ -24,7 +24,7 @@ setup: ## Setup dotfiles for the current user
 	@ln -sf ${DOTFILES}/emacs/emacs ${HOME}/.emacs
 	@touch ${HOME}/.zsh_local
 
-install: setup install-apt ## Base setup and install of APT rules
+install: setup install-apt install-winhost ## Base setup and install of APT rules
 
 update-apt:
 	apt-get update -q -y

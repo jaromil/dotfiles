@@ -16,4 +16,8 @@ if [ -r "${winhome}" ]; then
 	cp git/gitconfig "${winhome}/.gitconfig"
 	cp git/gitignore "${winhome}/.gitignore"
 	cp misc/editorconfig "${winhome}/.editorconfig"
+	cat << EOF > "${winhome}/.wslconfig"
+[wsl2]
+guiApplications=false
+EOF
 fi
