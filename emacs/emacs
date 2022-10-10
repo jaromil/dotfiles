@@ -58,6 +58,7 @@
 (setq helm-flx-for-helm-find-files t ;; t by default
       helm-flx-for-helm-locate t) ;; nil by default
 
+(autoload 'notmuch "notmuch" "notmuch mail" t)
 (require 'go-mode)
 
 (global-unset-key [(control x)(control z)])
