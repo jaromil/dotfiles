@@ -10,11 +10,13 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/{function,function_*,path,env,alias,grep,prompt,extensions,startmenu,onedrive}; do
+for DOTFILE in "$DOTFILES_DIR"/system/{function,function_*,path,env,alias,prompt,extensions,startmenu,onedrive}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
 . ${DOTFILES_DIR}/shell/inputrc
+
+[ -f "${HOME}/.rclocal" ] && . "${HOME}/.rclocal"
 
 # Set LSCOLORS
 if [ "`uname -s`" != "OpenBSD" ]; then
