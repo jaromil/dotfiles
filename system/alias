@@ -23,6 +23,7 @@ alias T="| tail"
 alias L="| less"
 
 # Useful aliases
+alias grep="grep $GREP_OPTIONS"
 
 # List declared aliases, functions, paths
 
