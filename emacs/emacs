@@ -73,11 +73,12 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "M-o") 'helm-occur)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-s") 'helm-swoop)
-(global-set-key (kbd "M-s M-s") 'helm-multi-swoop-all)
+(global-set-key (kbd "C-<S-s>") 'helm-multi-swoop-all)
 
 ;; because I'm sloppy
-(global-set-key (kbd "C-o") 'helm-find-files)
+(global-set-key (kbd "M-f") 'helm-find-files)
+(global-set-key (kbd "M-s") 'save-buffer)
+(global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "M-p") 'helm-buffers-list) ;; right hand easy
