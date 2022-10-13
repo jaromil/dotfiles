@@ -3,8 +3,6 @@
 
 # Hook for extra/custom stuff
 
-# private commands
-export HISTCONTROL=ignorespace
 
 # Clean up
 
