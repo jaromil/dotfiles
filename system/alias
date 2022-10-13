@@ -25,6 +25,9 @@ alias L="| less"
 # Useful aliases
 alias grep="grep $GREP_OPTIONS"
 
+# Hide tomb commands
+alias tomb=" tomb"
+
 # List declared aliases, functions, paths
 
 alias aliases="alias | sed 's/=.*//'"
