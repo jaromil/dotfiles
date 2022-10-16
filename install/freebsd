@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pkg install -y bash tmux zsh htop vim fusefs-ntfs-2022.5.17 \
+	emacs-nox magit-emacs_nox markdown-mode.el-emacs_nox \
+	lua-mode-emacs_nox notmuch-emacs_nox yaml-mode.el-emacs_nox
