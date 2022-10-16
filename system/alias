@@ -34,7 +34,7 @@ alias aliases="alias | sed 's/=.*//'"
 alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
 alias paths='echo -e ${PATH//:/\\n}'
 
-if [ "`uname -s`" != "OpenBSD" ]; then
+if [ "`uname -s`" == "Linux" ]; then
 # kill all leftover mosh sessions excluding the current one
 alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
 # Directory listing/traversal
