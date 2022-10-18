@@ -37,7 +37,13 @@ if ! test "\$(id -u)" = "0"; then
     echo "[adduser-remote] --------------------------------"
 else
 if ! test -r  /home/$username; then
+   if [ "\$(uname -s)" = "FreeBSD" ]; then
+    pw user add -n $username -d /home/$username -m -s /usr/local/bin/bash
+   else
     useradd -m $username
+   fi
+else
+   echo "user already exists"
 fi
 mkdir -p /home/$username/.ssh
 if ! test -r /home/$username/.ssh/authorized_keys; then
