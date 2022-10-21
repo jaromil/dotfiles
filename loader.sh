@@ -19,8 +19,9 @@ done
 [ -f "${HOME}/.rclocal" ] && . "${HOME}/.rclocal"
 
 # Set LSCOLORS
-if [ "`uname -s | cut -c '5-' -`" != "BSD" ]; then
-  eval "$(dircolors -b "$DOTFILES_DIR"/system/dir_colors)"
+system="`uname -s`"
+if [ "`echo $system | cut -c '5-' -`" != "BSD" ] && [ "$system" != "Darwin" ]; then
+  eval "`dircolors -b "$DOTFILES_DIR"/system/dir_colors`"
 else
   alias ls='ls -GF'
 fi
