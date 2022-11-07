@@ -9,6 +9,7 @@ if command -v fd >/dev/null; then
   export FZF_DEFAULT_OPTS="--ansi"
 fi
 
+# fzf completions and triggers
 if [ -r /usr/share/doc/fzf/examples/key-bindings.bash ]; then
   export FZF_ALT_C_OPTS="--preview 'tree -L 2 -C {} | head -200'"
   export FZF_COMPLETION_TRIGGER='~~'
@@ -19,3 +20,6 @@ else
   bind '"\e[A": history-substring-search-backward'
   bind '"\e[B": history-substring-search-forward'
 fi
+
+# ZFS completion
+. $HOME/.dotfiles/completions/zfs
