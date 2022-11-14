@@ -9,7 +9,7 @@ export HISTSIZE=32768;
 export HISTFILESIZE="${HISTSIZE}";
 export SAVEHIST=4096
 export HISTCONTROL=ignoredups:erasedups:ignorespace
-
+export HISTIGNORE='ssh *:mosh *:tomb *:'
 # Enable colors
 
 export CLICOLOR=1
