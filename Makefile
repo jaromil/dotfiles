@@ -44,6 +44,9 @@ install-firewall: update-apt ## Install basic ufw firewall protection allowing o
 install-emacs: update-apt ## Install emacs packages
 	sh install/emacs
 
+install-freebsd:
+	sh install/freebsd
+
 install-neovim: # Install neovim and plugins
 	sh install/neovim
 	if [ -d ${HOME}/.config/nvim ]; then mv ${HOME}/.config/nvim ${HOME}/.config/nvim.bck; fi
