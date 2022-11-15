@@ -6,7 +6,14 @@ pkg install -y gmake bash tmux zsh htop vim fusefs-ntfs-2022.5.17 \
 	fzf fd-find
 
 cat << EOF > /etc/periodic.conf.local
-# avoid huge filesystem activity
+echo " avoid huge filesystem activity"
 security_status_chksetuid_enable="NO"
 security_status_neggrpperm_enable="NO"
 EOF
+
+echo " change first user uid to 1000"
+firstuser=`pw user show 1001 | cut -d: -f1`
+pw usermod $firstuser -u 1000
+chown -R 1000:1001 /home/$firstuser
+
+
