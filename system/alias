@@ -35,14 +35,20 @@ alias aliases="alias | sed 's/=.*//'"
 alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
 alias paths='echo -e ${PATH//:/\\n}'
 
-if [ "`uname -s`" == "Linux" ]; then
+sys="`uname -s`"
+
+case "$sys" in
+	Linux|FreeBSD)
 # kill all leftover mosh sessions excluding the current one
+
+if [ "$sys" != "FreeBSD" ]; then
 alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
+fi
 # Directory listing/traversal
 LS_COLORS='--color -G'
 LS_TIMESTYLEISO='--time-style=long-iso'
 LS_GROUPDIRSFIRST='--group-directories-first'
-if [ "`uname -s`" != "Darwin" ]; then
+if [ "$sys" != "Darwin" ]; then
 alias ls="ls -rt $LS_COLORS"
 alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
 alias ll="ls -lrtA $LS_COLORS"
@@ -50,10 +56,11 @@ alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
 alias ld="ls -lrtd $LS_COLORS */"
 alias lp="stat -c '%a %n' *"
 fi
+
 unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
 # Network
 alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
-fi
+esac
 
 alias ..="cd .."
 alias ...="cd ../.."
