@@ -38,28 +38,40 @@ alias paths='echo -e ${PATH//:/\\n}'
 sys="`uname -s`"
 
 case "$sys" in
-	Linux|FreeBSD)
-# kill all leftover mosh sessions excluding the current one
+    Linux|FreeBSD)
+	# kill all leftover mosh sessions excluding the current one
 
-if [ "$sys" != "FreeBSD" ]; then
-alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
-fi
-# Directory listing/traversal
-LS_COLORS='--color -G'
-LS_TIMESTYLEISO='--time-style=long-iso'
-LS_GROUPDIRSFIRST='--group-directories-first'
-if [ "$sys" != "Darwin" ]; then
-alias ls="ls -rt $LS_COLORS"
-alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
-alias ll="ls -lrtA $LS_COLORS"
-alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
-alias ld="ls -lrtd $LS_COLORS */"
-alias lp="stat -c '%a %n' *"
-fi
+	if [ "$sys" != "FreeBSD" ]; then
+	    alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
+	fi
+	# Directory listing/traversal
+	LS_COLORS='--color -G'
+	LS_TIMESTYLEISO='--time-style=long-iso'
+	LS_GROUPDIRSFIRST='--group-directories-first'
+	if [ "$sys" != "Darwin" ]; then
+	    alias ls="ls -rt $LS_COLORS"
+	    alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
+	    alias ll="ls -lrtA $LS_COLORS"
+	    alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
+	    alias ld="ls -lrtd $LS_COLORS */"
+	    alias lp="stat -c '%a %n' *"
+	fi
 
-unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
-# Network
-alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+	unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
+	# Network
+	alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+esac
+
+# package management
+case "$sys" in
+	FreeBSD)
+	    alias pks='pkg search'
+	    alias pki='pkg install'
+	    ;;
+	Linux)
+	    alias aps='sudo apt-cache search'
+	    alias apti='sudo apt-get install'
+	    ;;
 esac
 
 alias ..="cd .."
