@@ -18,13 +18,14 @@
 # this source code; if not, write to: Free Software Foundation, Inc.,
 # 675 Mass Ave, Cambridge, MA 02139, USA.
 
-if ! [ -r "$1" ]; then
+keyfile="$1"
+[ -r "$keyfile" ] || keyfile="$HOME/OneDrive/Shell/ssh-pubkeys/$1.pub"
+[ -r "$keyfile" ] || {
    echo "usage: adduser-remove path/to/ssh-key/friend.pub"
    echo "the username used will be 'friend', or next argument"
    exit 1
-fi
+}
 
-keyfile="$1"
 key=$(basename $keyfile)
 username=${2:-$(echo "$key" | cut -d. -f1)}
 tmp=$(mktemp)
