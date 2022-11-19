@@ -72,3 +72,6 @@ install-winhost: ## Copy WSL dotfiles to the Windows host user dir
 
 install-zfs: update-apt ## Install ZFS
 	sh install/zfs
+
+install-ssh:
+	sh install/keygen-ssh-root-user
