@@ -114,6 +114,6 @@
 	(write-region "" nil ispell-personal-dictionary nil 0))
   )
 
-(require 'flycheck-grammarly)
-(with-eval-after-load 'flycheck
-  (flycheck-grammarly-setup))
+;; (require 'flycheck-grammarly)
+;; (with-eval-after-load 'flycheck
+;;   (flycheck-grammarly-setup))
