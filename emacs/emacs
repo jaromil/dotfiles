@@ -61,6 +61,8 @@
 (autoload 'notmuch "notmuch" "notmuch mail" t)
 (require 'go-mode)
 
+(require 'helm-ag)
+
 (global-unset-key [(control x)(control z)])
 (global-set-key (kbd "M-x") 'helm-M-x)
 ;; M-l in qwerty is soft on right hand and I use it also in tmux
