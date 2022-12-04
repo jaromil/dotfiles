@@ -6,7 +6,8 @@ pkg install -y gmake bash tmux zsh htop vim fusefs-ntfs-2022.5.17 \
 	lua-mode-emacs_nox notmuch-emacs_nox yaml-mode.el-emacs_nox \
 	fzf fd-find ncurses terminfo-db opendircolors mosh wget direnv \
 	psearch ccache gnu-watch portmaster the_silver_searcher findutils \
-	hunspell en-hunspell nl-hunspell fr-hunspell es-hunspell it-hunspell
+	hunspell en-hunspell nl-hunspell fr-hunspell es-hunspell it-hunspell \
+	unbound
 
 cat << EOF > /etc/periodic.conf.local
 echo " avoid huge filesystem activity"
@@ -65,4 +66,3 @@ SAVE_SHARED=wopt
 ALWAYS_SCRUB_DISTFILES=dopt
 PM_LOG=/var/log/portmaster.log
 EOF
-
