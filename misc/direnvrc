@@ -11,5 +11,5 @@ use_nvm() {
 
 # cat README.nfo in each dir 
 use_readme() {
-    if [ -r README.nfo ]; then echo '--- readme.nfo ---' && more README.nfo && echo '------------------'; fi
+    if [ -r README.nfo ]; then echo '--- readme.nfo ---' && cat README.nfo && echo '------------------'; fi
 }
