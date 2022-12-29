@@ -69,7 +69,7 @@ case "$sys" in
 	    alias pki='pkg install'
 	    ;;
 	Linux)
-	    alias aps='sudo apt-cache search'
+	    alias aps='apt-cache search'
 	    alias apti='sudo apt-get install'
 	    ;;
 esac
