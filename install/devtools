@@ -5,5 +5,9 @@ apt-get install -y -q --no-install-recommends \
 	luajit lua5.1 libluajit-5.1-dev liblua5.1-0-dev luarocks editorconfig \
 	pkg-config valgrind gdb manpages-dev libpopt-dev libiberty-dev libpython3-dev
 
+# to run github actions locally
+curl https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
+
+
 # manpages-posix
 
