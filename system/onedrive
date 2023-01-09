@@ -17,9 +17,9 @@ if [ -d "$upath" ]; then
 		fi
 	fi
 
-	if ! [ -r "${HOME}/Downloads" ]; then
-		ln -s "${upath}/Downloads" "${HOME}/Downloads"; fi
-	if ! [ -r "${HOME}/AppData" ]; then
-		ln -s "${upath}/AppData" "${HOME}/AppData"; fi
+	linkdir() {	[ -r "${HOME}/$1" ] || ln -s "${upath}/$1" "${HOME}/$1"; }
+	linkdir "Downloads"
+	linkdir "Videos"
+	linkdir "AppData"
 
 fi
