@@ -66,11 +66,11 @@ esac
 case "$sys" in
 	FreeBSD)
 	    alias pks='pkg search'
-	    alias pki='pkg install'
+	    alias pki='pkg install -y'
 	    ;;
 	Linux)
 	    alias aps='apt-cache search'
-	    alias apti='sudo apt-get install'
+	    alias apti='sudo apt-get install -y'
 	    ;;
 esac
 
