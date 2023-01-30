@@ -23,3 +23,10 @@ fi
 
 # ZFS completion
 . $HOME/.dotfiles/completions/zfs
+. $HOME/.dotfiles/completions/git
+
+# bash-completion system package
+t=/usr/local/share/bash-completion/bash_completion; [ -r $t ] && . $t
+t=/usr/share/bash-completion/bash_completion; [ -r $t ] && . $t
+. $HOME/.dotfiles/completions/ssh
+
