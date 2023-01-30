@@ -12,6 +12,8 @@ prepend-path "/bin"
 prepend-path "/usr/bin"
 prepend-path "/usr/local/bin"
 
+echo "$HOME" | grep termux > /dev/null && prepend-path "/data/data/com.termux/files/usr/bin"
+
 # private bin paths
 prepend-path "$DOTFILES_DIR/bin"
 prepend-path "$HOME/bin"

@@ -54,8 +54,13 @@ _bash_prompt_config() {
   local WHITE_BOLD="${ESC_OPEN}${BOLD}$(_setaf 7)${ESC_CLOSE}"
 
   # Expose the variables we need in prompt command
+if echo $HOME |grep termux >/dev/null; then
+  P_USER=""
+  P_HOST=""
+else
   P_USER=${BLUE}${USER_SYMBOL}
   P_HOST=${CYAN}${HOST_SYMBOL}
+fi
   P_WHITE=${WHITE}
   P_GRAY=${GRAY}
   P_CYAN=${CYAN_BOLD}
