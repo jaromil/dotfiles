@@ -29,7 +29,8 @@
 (setq split-window-threshold 110)
 (setq copyright-year-ranges t)
 
-
+(require 'rainbow-delimiters)
+(require 'ws-butler)
 ;; automatic whitespace trimming in programming modes
 (add-hook 'prog-mode-hook #'ws-butler-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
