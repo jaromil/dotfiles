@@ -41,3 +41,7 @@ for PATTERN in .cvs .git .hg .svn; do
 done
 export GREP_OPTIONS
 export GREP_COLOR='1;32'
+
+if [ -r $HOME/OneDrive/Shell/private-env ]; then
+	. $HOME/OneDrive/Shell/private-env
+fi
