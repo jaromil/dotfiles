@@ -14,7 +14,7 @@ EOF
 apt-get install -y -q zsh fzf tmux htop iotop suckless-tools vim-nox git tig\
  software-properties-common apt-transport-https jq mosh direnv tomb \
  mtr-tiny nnn apt-file mlocate pwgen silversearcher-ag liblnk-utils vbetool \
- fd-find net-tools locales bash-completion
+ fd-find net-tools locales bash-completion bsdextrautils curl
 
 # interactive prompt
 locale-gen en_US.UTF-8
@@ -35,5 +35,3 @@ fi
 
 echo "Starting mlocate and apt-file database updates in background"
 (updatedb ; apt-file update) &
-
-
