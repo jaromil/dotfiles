@@ -2,6 +2,14 @@
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs"))
 (set-face-attribute 'default nil :font "Hack")
 
+(require 'package)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(unless (fboundp 'package-activate-all) (package-initialize))
+
+
 (require 'doom-themes)
 (setq doom-themes-enable-bold t      ; if nil, bold is universally disabled
       doom-themes-enable-italic nil) ; if nil, italics is universally disabled
