@@ -26,7 +26,7 @@ arg="\$1"
 if [ -r "\$1" ]; then # argument is a file
    arg=\`wslpath -w "\$1"\`
 fi
-"$line" "\$arg"
+"$1" "\$arg"
 EOF
 	chmod +x "$2"
 }
@@ -78,3 +78,7 @@ fi
 # handy aliases
 if [ -r "${HOME}/bin/msedge.exe" ]; then alias edge='msedge.exe'; fi
 if [ -r "${HOME}/bin/winword.exe" ]; then alias word='winword.exe'; fi
+
+# hardcode some
+wrap_exe /mnt/c/Windows/System32/notepad.exe ${HOME}/bin/notepad.exe
+wrap_exe /mnt/c/Windows/System32/calc.exe ${HOME}/bin/calculator.exe
