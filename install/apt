@@ -14,7 +14,7 @@ EOF
 apt-get install -y -q zsh fzf tmux htop iotop suckless-tools vim-nox git tig\
  software-properties-common apt-transport-https jq mosh direnv \
  mtr-tiny pwgen silversearcher-ag liblnk-utils vbetool \
- net-tools locales bash-completion bsdextrautils curl wget
+ net-tools locales bash-completion bsdextrautils curl wget tree
 
 # interactive prompt
 locale-gen en_US.UTF-8
