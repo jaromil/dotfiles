@@ -51,7 +51,7 @@ case "$sys" in
 	if [ "$sys" != "Darwin" ]; then
 	    alias ls="ls -rt $LS_COLORS"
 	    alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
-	    alias ll="ls -lrtA $LS_COLORS"
+	    alias ll="ls -lrthA $LS_COLORS"
 	    alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
 	    alias ld="ls -lrtd $LS_COLORS */"
 	    alias lp="stat -c '%a %n' *"
