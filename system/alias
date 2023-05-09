@@ -5,7 +5,7 @@ if command -v vim > /dev/null; then alias vi='vim'; fi
 
 alias .f="cd $HOME/.dotfiles"
 alias .o="cd $HOME/OneDrive"
-alias .s="cd $HOME/OneDrive/Shell"
+alias .s="cd $HOME/shell"
 alias .d="cd $HOME/OneDrive/Documents"
 alias .alias="vi $HOME/.dotfiles/system/alias"
 alias .path="vi $HOME/.dotfiles/system/path"
@@ -71,6 +71,7 @@ case "$sys" in
 	Linux)
 	    alias aps='apt-cache search'
 	    alias apti='sudo apt-get install -y'
+		alias aptu='sudo apt-get update && sudo apt-get dist-upgrade'
 	    ;;
 esac
 
