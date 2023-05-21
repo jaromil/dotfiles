@@ -19,7 +19,8 @@
 # 675 Mass Ave, Cambridge, MA 02139, USA.
 
 keyfile="$1"
-[ -r "$keyfile" ] || keyfile="$HOME/OneDrive/Shell/ssh-pubkeys/$1.pub"
+[ -r "$keyfile" ] || keyfile="$HOME/shell/ssh-pubkeys/$1.pub"
+[ -r "$keyfile" ] || keyfile="$HOME/.ssh/$1.pub"
 [ -r "$keyfile" ] || {
    echo "usage: adduser-remove path/to/ssh-key/friend.pub"
    echo "the username used will be 'friend', or next argument"
