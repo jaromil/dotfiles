@@ -137,4 +137,8 @@
 (setq lock-file-name-transforms
       '(("\\`/.*/\\([^/]+\\)\\'" "/var/tmp/\\1" t)))
 
-
+;; line based comments in C
+(add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
+;; ctrl + mouse scrol to zoom text
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-increase)
