@@ -16,7 +16,6 @@ alias e='emacsclient -n'
 alias .f-install-tmux="touch $HOME/.tmux_startup"
 
 # Global aliases
-
 alias G="| grep -i"
 alias H="| head"
 alias T="| tail"
@@ -37,31 +36,6 @@ alias paths='echo -e ${PATH//:/\\n}'
 
 sys="`uname -s`"
 
-case "$sys" in
-    Linux|FreeBSD)
-	# kill all leftover mosh sessions excluding the current one
-
-	if [ "$sys" != "FreeBSD" ]; then
-	    alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
-	fi
-	# Directory listing/traversal
-	LS_COLORS='--color -G'
-	LS_TIMESTYLEISO='--time-style=long-iso'
-	LS_GROUPDIRSFIRST='--group-directories-first'
-	if [ "$sys" != "Darwin" ]; then
-	    alias ls="ls -rt $LS_COLORS"
-	    alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
-	    alias ll="ls -lrthA $LS_COLORS"
-	    alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
-	    alias ld="ls -lrtd $LS_COLORS */"
-	    alias lp="stat -c '%a %n' *"
-	fi
-
-	unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
-	# Network
-	alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
-esac
-
 # package management
 case "$sys" in
 	FreeBSD)
@@ -69,10 +43,25 @@ case "$sys" in
 	    alias pki='pkg install -y'
 	    ;;
 	Linux)
-	    alias aps='apt-cache search'
-	    alias apti='sudo apt-get install -y'
-		alias aptu='sudo apt-get update && sudo apt-get dist-upgrade'
-	    ;;
+	# kill all leftover mosh sessions excluding the current one
+	alias moshkill="pgrep mosh-server | grep -v $(ps -o ppid --no-headers $$) | xargs kill"
+	# Directory listing/traversal
+	LS_COLORS='--color -G'
+	LS_TIMESTYLEISO='--time-style=long-iso'
+	LS_GROUPDIRSFIRST='--group-directories-first'
+	#alias ls="ls -rt $LS_COLORS"
+	alias l="ls -lrtahA $LS_COLORS $LS_GROUPDIRSFIRST"
+	alias ll="ls -lrthA $LS_COLORS"
+	alias lt="ls -lhAtr $LS_COLORS $LS_GROUPDIRSFIRST"
+	alias ld="ls -lrtd $LS_COLORS */"
+	alias lp="stat -c '%a %n' *"
+	unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
+	# Network
+	alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+	alias aps='apt-cache search'
+	alias apti='sudo apt-get install -y'
+	alias aptu='sudo apt-get update && sudo apt-get dist-upgrade'
+	;;
 esac
 
 alias ..="cd .."
@@ -81,11 +70,4 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"                  # Go to previous dir with -
 alias cd.='cd $(readlink -f .)'    # Go to real dir (i.e. if current dir is linked)
-
-# Request using GET, POST, etc. method
-
-for METHOD in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-  alias "$METHOD"="lwp-request -m '$METHOD'"
-done
-unset METHOD
 
