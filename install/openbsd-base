@@ -12,3 +12,4 @@ U=dyne rm -f /home/$U/.ssh-agent; /usr/local/bin/setuidgid $U ssh-agent > /home/
 EOF
 chmod +x /etc/rc.local
 
+
