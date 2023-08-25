@@ -9,6 +9,10 @@ use_nvm() {
     rm $tmp
 }
 
+use_emsdk() {
+   if [ -r emsdk ]; then . emsdk/emsdk_env.sh; fi
+}
+
 # cat README.nfo in each dir 
 use_readme() {
     if [ -r README.nfo ]; then echo '--- readme.nfo ---' && cat README.nfo && echo '------------------'; fi
