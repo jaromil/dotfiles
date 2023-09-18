@@ -23,12 +23,9 @@ do
             ;;
 
         DUPTYPE_WITHIN_SAME_TREE|DUPTYPE_OUTSIDE_TREE)
-            if [[ -n "$name" ]] && [[ ${path##*/} == $name ]]
-            then
-                echo "Remove duplicate $path" >&2
-                # rm -f "$path"
-            else
-                echo "Skipping differently named $path" >&2
+            if [[ -n "$name" ]] && [[ ${path##*/} == $name ]]; then
+              echo "Remove duplicate $path" >&2
+              rm -f "$path"
             fi
             ;;
     esac
