@@ -23,7 +23,7 @@ alias L="| less"
 
 # Useful aliases
 alias grep="grep $GREP_OPTIONS"
-alias zl="zfs list -o name,used,avail,readonly,compression,mountpoint"
+alias zl="zfs list -o name,used,avail,readonly,compression"
 
 # Hide tomb commands
 alias tomb=" tomb"
