@@ -142,3 +142,7 @@
 ;; ctrl + mouse scrol to zoom text
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase)
+
+
+;; unfill paragraphs to remove newlines
+(require 'unfill)
