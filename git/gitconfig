@@ -19,7 +19,7 @@
 	co = checkout
 	st = status
 	up = pull --rebase
-	br = branch -av
+	br = branch -av --sort=-committerdate
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	ll = log --pretty=oneline --abbrev-commit --pretty=format:'%C(yellow)%h%Creset %s %Cgreen(%cr)%Creset'
 	changes = log --oneline --reverse
