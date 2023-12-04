@@ -2,6 +2,8 @@
 
 PATH=""
 
+# snap binary path
+if [ -r /snap/bin ]; then prepend-path "/snap/bin"; fi
 # cosmopolitan toolchain
 if [ -x /opt/cosmo ];  then prepend-path "/opt/cosmo/bin"; fi
 if [ -x /opt/cosmos ]; then prepend-path "/opt/cosmos/bin"; fi
