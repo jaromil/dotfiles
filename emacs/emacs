@@ -86,14 +86,31 @@
 (global-set-key (kbd "M-.") 'helm-ag)
 (global-set-key (kbd "C-x g") 'magit)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "M-o") 'helm-occur)
+(global-set-key (kbd "C-o") 'helm-multi-swoop-all)
+;(global-set-key (kbd "C-x o") 'helm-multi-swoop)
+(global-set-key (kbd "M-o") 'other-frame)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-<S-s>") 'helm-multi-swoop-all)
+
+;; vim like cursor movements
+(global-set-key (kbd "M-k") 'next-line)
+(global-set-key (kbd "M-j") 'previous-line)
+(global-set-key (kbd "M-l") 'forward-char)
+(global-set-key (kbd "M-h") 'backward-char)
+
+;; function keys
+(global-set-key [f9] 'magit)
+
+;; easier split window
+(global-set-key (kbd "M-1") 'delete-other-windows)
+(global-set-key (kbd "M-2") 'split-window-below)
+(global-set-key (kbd "M-3") 'split-window-right)
 
 ;; because I'm sloppy
 (global-set-key (kbd "M-f") 'helm-find-files)
 (global-set-key (kbd "M-s") 'save-buffer)
-(global-set-key (kbd "C-o") 'other-window)
+; (global-set-key (kbd "C-o") 'other-window)
+(global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "M-p") 'helm-buffers-list) ;; right hand easy
