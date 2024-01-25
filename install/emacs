@@ -9,6 +9,7 @@ apt-get install emacs-nox elpa-ivy elpa-monokai-theme elpa-yaml-mode \
 		elpa-browse-kill-ring elpa-bar-cursor elpa-avy elpa-org \
 		elpa-helm-org elpa-imenu-list pandoc elpa-ws-butler \
 		elpa-anzu elpa-flycheck elpa-s elpa-websocket elpa-notmuch \
-		elpa-magit elpa-rainbow-delimiters
+		elpa-magit elpa-rainbow-delimiters elpa-editorconfig \
+		editorconfig
 
 # only found in ubuntu:		elpa-darkroom elpa-doom-themes

@@ -22,13 +22,14 @@
 ;; Enable custom neotree theme
 ;; (doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
 
+(editorconfig-mode)
 (cua-mode)
 (ivy-mode)
 (server-start)
 (menu-bar-mode -1)
 ;; (toggle-scroll-bar -1)
 ;; (tool-bar-mode -1)
-;; (display-line-numbers-mode 
+;; (display-line-numbers-mode
 (setq vc-follow-symlinks t)
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq-default tab-width 4)
