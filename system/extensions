@@ -1,3 +1,8 @@
+# guix package manager
+[ -r ${HOME}/.config/guix/current/etc/profile ] && {
+	GUIX_PROFILE="${HOME}/.config/guix/current"
+	source "${GUIX_PROFILE}/etc/profile"       
+}
 
 # nodejs version manager
 export NVM_DIR="$HOME/.config/nvm"
