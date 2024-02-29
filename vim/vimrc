@@ -1,6 +1,8 @@
 set mouse=v
 syn on
 colorscheme elflord
+set tabstop=4
+set shiftwidth=4
 
 " cmap w!! w !sudo tee % >/dev/null
 " set fo=tcrq
