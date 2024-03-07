@@ -7,6 +7,7 @@ use_nvm() {
     npm completion > $tmp
     . $tmp
     rm $tmp
+    export PATH=./node_modules/.bin:$PATH
 }
 
 use_emsdk() {
