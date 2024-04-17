@@ -43,3 +43,5 @@
 	rebase = true
 	autoSetupRemote = true
 	default = current
+[safe]
+	directory = /opt/dynebolic
