@@ -12,10 +12,17 @@ APT::Install-Suggests "false";
 EOF
 
 DEBIAN_FRONTEND=noninteractive \
-apt-get install -y -q zsh fzf tmux htop iotop suckless-tools vim-nox git tig\
+apt-get install -y -q zsh fzf tmux htop iotop suckless-tools vim-nox git tig \
  software-properties-common apt-transport-https jq mosh direnv \
- mtr-tiny pwgen silversearcher-ag liblnk-utils vbetool \
- net-tools locales bash-completion bsdextrautils curl wget tree
+ mtr-tiny pwgen silversearcher-ag fd-find \
+ net-tools locales bash-completion bsdextrautils curl wget tree \
+ manpages-posix manpages-posix-dev
+
+
+if [ -d "/mnt/c/ProgramData/Microsoft/Windows/Start Menu/Programs" ]; then
+DEBIAN_FRONTEND=noninteractive \
+apt-get install -y -q liblnk-utils vbetool
+fi
 
 # interactive prompt
 # locale-gen en_US.UTF-8
