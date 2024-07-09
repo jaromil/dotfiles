@@ -15,7 +15,7 @@ DEBIAN_FRONTEND=noninteractive \
 apt-get install -y -q zsh fzf tmux htop iotop suckless-tools vim-nox git tig \
  software-properties-common apt-transport-https jq mosh direnv \
  mtr-tiny pwgen silversearcher-ag fd-find \
- net-tools locales bash-completion bsdextrautils curl wget tree bc
+ net-tools locales bash-completion bsdextrautils curl wget tree bc batcat
 # manpages-posix manpages-posix-dev
 
 
