@@ -21,3 +21,4 @@ setup: ## Setup dotfiles for the current user
 	@$(call installdot,misc)
 	@ln -sf ${DOTFILES}/emacs/emacs ${HOME}/.emacs
 	@touch ${HOME}/.zsh_local
+	@touch ${HOME}/.hushlogin
