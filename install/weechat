@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# config this
+DEBIAN_VERSION=bookworm
+
+mkdir -p /usr/share/keyrings
+gpg --no-default-keyring --keyring /usr/share/keyrings/weechat-archive-keyring.gpg --keyserver hkps://keys.openpgp.org --recv-keys 11E9DE8848F2B65222AA75B8D1820DB22A11534E
+
+echo "deb [signed-by=/usr/share/keyrings/weechat-archive-keyring.gpg] https://weechat.org/debian $DEBIAN_VERSION main" \
+	| sudo tee /etc/apt/sources.list.d/weechat.list
+
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update -y -q
+
+apt-get install -y -q  weechat-curses weechat-plugins weechat-python weechat-perl
+
