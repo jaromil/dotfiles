@@ -2,8 +2,13 @@
 
 type=${type:-ed25519}
 me=`id -un`
-user=`id -un 1000`
-[ -d "/home/$user" ] || user=`id -un 1001`
+if [ "$1" = "" ]; then
+  user=`id -un 1000`
+  [ -d "/home/$user" ] || user=`id -un 1001`
+else
+	user="$1"
+	[ -d "/home/$user" ] || { echo "User home not found: /home/$user"; exit 1;}
+fi
 
 echo "Creating ssh key for $me"
 if [ -r "$HOME/.ssh/id_$type" ]; then
