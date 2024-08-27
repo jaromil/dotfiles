@@ -62,8 +62,8 @@ Keys are remapped for my confort as follows:
 
 (global-unset-key [(control x)(control z)])
 (global-set-key (kbd "M-x") 'helm-M-x)
-;; M-l in qwerty is soft on right hand and I use it also in tmux
-(global-set-key (kbd "M-l") 'helm-M-x) ;; this overrides an ugly lowercase hotkey
+;; M-a in qwerty is soft on left hand and I use it also in tmux
+(global-set-key (kbd "M-a") 'helm-M-x) ;; this overrides an ugly lowercase hotkey
 (global-set-key (kbd "M-k") 'kill-buffer) ;; I'm not using it to delete lower block
 (global-set-key (kbd "M-i") 'helm-imenu)
 (global-set-key (kbd "M-,") 'helm-ag-project-root)
