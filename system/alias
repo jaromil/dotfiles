@@ -35,6 +35,9 @@ alias aliases="alias | sed 's/=.*//'"
 alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
 alias paths='echo -e ${PATH//:/\\n}'
 
+# shortcut for py venv
+alias venv="python3 -m venv .venv"
+
 sys="`uname -s`"
 
 # package management
