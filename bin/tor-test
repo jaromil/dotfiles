@@ -1,0 +1,30 @@
+#!/bin/sh
+
+dpkg -s python3-socks > /dev/null || {
+  >&2 echo "apt-get install -y python3-socks"
+  exit 1
+}
+tmp=`mktemp`
+
+# ripped from https://github.com/narodnik/script/blob/master/tor-test.py
+cat << EOF > $tmp
+# pip install pysocks
+import socks
+import socket
+socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 9050)
+socket.socket = socks.socksocket
+import requests
+response = requests.get("https://myip.wtf/text")
+print(response.content)
+EOF
+
+tor_ip="`python3 $tmp 2>/dev/null | cut -d\' -f2`"
+rm -f "$tmp"
+[ "$tor_ip" = "" ] && {
+  >&2 echo "Tor is not running"
+  exit 1
+}
+my_ip=`my-ip`
+
+echo "clearnet ip: $my_ip"
+echo "tor exit ip: $tor_ip"
