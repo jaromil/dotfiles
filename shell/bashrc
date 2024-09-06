@@ -72,6 +72,13 @@ else
     >&2 printf "${arrow} ${cyan}System `uptime`${reset}\n"
 fi
 
+[[ -r "$HOME/.bash_local" ]] && {
+    >&2 printf "${arrow} ${cyan}Load local bash configuration: $HOME/.bash_local${reset}\n"
+	. "$HOME/.bash_local"; }
+[[ -r $HOME/.bashrc.local ]] && {
+    >&2 printf "${arrow} ${cyan}Load local bash configuration: $HOME/.bashrc.local${reset}\n"
+	. "$HOME/.bashrc.local"; }
+
 >&2 echo
 
 if command -v tmux &> /dev/null && [ -r "$HOME/.tmux_startup" ] && [ -n "$PS1" ] \
