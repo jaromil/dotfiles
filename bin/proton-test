@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if curl -s https://api.protonmail.ch/vpn/logicals | grep "$(curl -s ip.me)" > /dev/null
+then
+  >&2 echo "OK! ProtonVPN is tunneling this connection"
+else
+  >&2 echo "WARNING! ProtonVPN is not tunneling this connection"
+fi
