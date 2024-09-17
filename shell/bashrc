@@ -81,6 +81,8 @@ fi
 
 >&2 echo
 
+[[ -r "$HOME/.motd" ]] && >&2 cat "$HOME/.motd"
+
 if command -v tmux &> /dev/null && [ -r "$HOME/.tmux_startup" ] && [ -n "$PS1" ] \
        && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] \
        && [[ "$SSH_TTY" != "" ]]; then
