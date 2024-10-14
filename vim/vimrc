@@ -1,6 +1,6 @@
 set mouse=v
 syn on
-colorscheme elflord
+colorscheme darkblue
 set tabstop=4
 set shiftwidth=4
 
