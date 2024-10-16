@@ -76,4 +76,4 @@ alias -- -="cd -"                  # Go to previous dir with -
 alias cd.='cd $(readlink -f .)'    # Go to real dir (i.e. if current dir is linked)
 
 # only if found
-command -v batcat > /dev/null && alias cat='batcat'
+command -v batcat > /dev/null && alias cat='batcat -p'
