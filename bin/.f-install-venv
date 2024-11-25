@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ -r .venv ] || python3 -m venv .venv
+echo "use_venv" >> .envrc
+direnv allow
