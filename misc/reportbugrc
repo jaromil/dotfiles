@@ -1,6 +1,8 @@
 # ~/.reportbugrc
-email "jaromil@dyne.org"
-sign "yes"
-gpgkey "73B35DA54ACB7D10"
-
+email "Denis Roio <jaromil@dyne.org>"
+sign gpg
+gpgkey 73B35DA54ACB7D10
+bts debian
+mode advanced
+ui text
 
