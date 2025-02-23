@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PATH=""
 
@@ -30,6 +30,12 @@ prepend-path "$HOME/.local/bin"
 prepend-path "/sbin"
 prepend-path "/usr/sbin"
 prepend-path "/usr/local/sbin"
+
+# android ndk system path
+[ -r /usr/lib/android-ndk/ ] && {
+  export ANDROID_NDK_HOME=/usr/lib/android-ndk
+  prepend-path "${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin"
+}
 
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
