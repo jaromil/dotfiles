@@ -45,3 +45,5 @@
 	default = current
 [safe]
 	directory = /opt/dynebolic
+[init]
+	defaultBranch = main
