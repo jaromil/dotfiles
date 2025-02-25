@@ -86,3 +86,7 @@ if [ -r "${HOME}/bin/winword.exe" ]; then alias word='winword.exe'; fi
 # hardcode some
 wrap_exe /mnt/c/Windows/System32/notepad.exe ${HOME}/bin/notepad.exe
 wrap_exe /mnt/c/Windows/System32/calc.exe ${HOME}/bin/calculator.exe
+
+# clipboard util
+ln -sf "/mnt/c/Windows/System32/clip.exe" ${HOME}/bin/clip.exe
+
