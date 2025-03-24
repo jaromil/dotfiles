@@ -1,6 +1,7 @@
 # Makefile to install dependencies and setup dotfiles
 
-DOTFILES ?= ${HOME}/.dotfiles
+DOTFILES := $(shell pwd)
+HOME := $(dir ${DOTFILES})
 
 # installs a $HOME/.file for each file found in $1/*
 installdot = for i in $$(ls ${1}/); do \
