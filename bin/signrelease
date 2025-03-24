@@ -1,0 +1,49 @@
+#!/bin/zsh
+#
+# shasum and sign release
+# small zsh tool by Jaromil
+
+KEY=4ACB7D10
+SUM=sha512sum
+
+{ test -r "$1" } || { print "usage: signrelease [directory|tarball]"; return 0 }
+
+target="$1"
+
+{ test -d "$target" } && {
+
+    pushd "$target"
+    for i in README.md INSTALL.md ChangeLog.md AUTHORS.md KNOWN_BUGS.md TODO.md; do
+	{ test -r $i } && {
+	    print "converting $i to .txt"
+	    mv $i ${i%%.md}.txt }
+	# cat $i | markdown > ${i%%.md}.html
+    done
+
+    # remove git dirs
+    { test -r .gitignore } && { rm -f .gitignore }
+    { test -d .git } && { rm -rf .git }
+
+    # generate configure
+    # autoreconf -i
+
+    popd
+
+    print "packing tarball from dir $target"
+    tar cfz ${target}.tar.gz ${target}
+    target="$1.tar.gz"
+}
+
+{ test -r "$target" } && {
+    print "making checksum of $target"
+    ${=SUM} "$target" > "$target.sha"
+    print "signing tarball with GnuPG key id $KEY"
+    gpg -b -a -u $KEY "$target"
+}
+
+print "Release done:"
+ls -lh ${target}
+cat ${target}.sha
+
+
+    
