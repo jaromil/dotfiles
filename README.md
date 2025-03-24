@@ -20,6 +20,21 @@ Do `make setup` to activate, beware it will overwrite some dotfiles:
 - ~/.signature
 - ~/.direnvrc
 
+
+## Windows native
+
+Install [Git for Windows](https://gitforwindows.org/) and launch its shell.
+
+Install GNU Make, dotfiles and run make with full path:
+```
+winget install gnuwin32.make
+curl https://jaromil.dyne.org/dotfiles.sh | sh
+cd .dotfiles
+"C:\Program Files (x86)\GnuWin32\bin\make.exe"
+```
+
+Get out and then open the Git shell again.
+
 ## Cheat-sheet
 
 [![image](https://github.com/user-attachments/assets/c142e937-99ec-4058-9b40-4f0ba4274495)](https://cheatography.com/jaromil/cheat-sheets/jaromil-s-dotfiles/#downloads)
