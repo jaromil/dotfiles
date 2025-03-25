@@ -1,0 +1,9 @@
+# support MINGW environments
+
+uname | grep '^MINGW' && {
+	[ -r /etc/profile ] && . /etc/profile
+}
+
+# that's all for now
+
+

@@ -10,7 +10,7 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/{function,function_*,path,env,alias,prompt,extensions,startmenu,onedrive}; do
+for DOTFILE in "$DOTFILES_DIR"/system/{function,function_*,path,env,mingw,alias,prompt,extensions,startmenu,onedrive}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
