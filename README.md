@@ -28,6 +28,7 @@ Install [Git for Windows](https://gitforwindows.org/) and launch its shell.
 Install GNU Make, dotfiles and run make with full path:
 ```
 winget install gnuwin32.make
+winget install direnv.direnv
 curl https://jaromil.dyne.org/dotfiles.sh | sh
 cd .dotfiles
 "C:\Program Files (x86)\GnuWin32\bin\make.exe"
