@@ -2,7 +2,7 @@
 
 uname | grep '^MINGW' >/dev/null && {
 	[ -r /etc/profile ] && . /etc/profile
-	prepend-path "/c/Program Files (x86)/GnuWin32/bin/"
+	export PATH="$PATH:/c/Program Files (x86)/GnuWin32/bin/"
 }
 
 # that's all for now
