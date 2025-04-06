@@ -54,7 +54,7 @@ reset='\033[0m'
 
 system=`uname -s`
 
->&2 printf "${arrow} ${cyan}Welcome to ${reset}`hostname -s` ($system)"
+>&2 printf "${arrow} ${cyan}Welcome to ${reset}`hostname` ($system)"
 >&2 echo
 
 if [[ "$system" == Linux ]]; then
@@ -67,9 +67,11 @@ fi
 fi
 
 if [[ "$system" =~ Linux ]]; then
-    >&2 printf "${arrow} ${cyan}System `uptime -p`${reset}\n"
+  >&2 printf "${arrow} ${cyan}System `uptime -p`${reset}\n"
+elif uname | grep '^MINGW' >/dev/null; then
+  >&2 printf "${arrow} ${cyan}System uptime unknown (Win)\n"
 else
-    >&2 printf "${arrow} ${cyan}System `uptime`${reset}\n"
+  >&2 printf "${arrow} ${cyan}System `uptime`${reset}\n"
 fi
 
 [[ -r "$HOME/.bash_local" ]] && {
