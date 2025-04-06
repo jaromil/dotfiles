@@ -1,8 +1,8 @@
 # support MINGW environments
 
 find_emacs_path() {
-	withver=`ls '/c/Program Files/Emacs/' | grep '^emacs-'`
-	found="/c/Program Files/Emacs/${withver}/bin"
+	local withver=`ls '/c/Program Files/Emacs/' | grep '^emacs-'`
+	local found="/c/Program Files/Emacs/${withver}/bin"
 	[ -d "$found" ] && echo "$found"
 }
 
@@ -10,7 +10,11 @@ find_emacs_path() {
 uname | grep '^MINGW' >/dev/null && {
 	[ -r /etc/profile ] && . /etc/profile
 	export PATH="$PATH:/c/Program Files (x86)/GnuWin32/bin/"
-	export PATH="$PATH:`find_emacs_path`"
+	found=`find_emacs_path`	
+	[ "$found" == "" ] || {
+		export PATH="$PATH:`find_emacs_path`"
+		alias emacs='emacs.exe -nw'
+	}
 }
 
 # that's all for now
