@@ -1,0 +1,18 @@
+# support MINGW environments
+
+find_emacs_path() {
+	withver=`ls '/c/Program Files/Emacs/' | grep '^emacs-'`
+	found="/c/Program Files/Emacs/${withver}/bin"
+	[ -d "$found" ] && echo "$found"
+}
+
+
+uname | grep '^MINGW' >/dev/null && {
+	[ -r /etc/profile ] && . /etc/profile
+	export PATH="$PATH:/c/Program Files (x86)/GnuWin32/bin/"
+	export PATH="$PATH:`find_emacs_path`"
+}
+
+# that's all for now
+
+
