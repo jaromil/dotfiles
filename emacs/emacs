@@ -164,3 +164,30 @@
 
 ;; unfill paragraphs to remove newlines
 (require 'unfill)
+
+;; add bats and shebangs to sh-mode
+(add-to-list 'auto-mode-alist '("\\.bats\\'" . sh-mode))
+(add-to-list 'interpreter-mode-alist '("bash" . sh-mode))
+(add-to-list 'interpreter-mode-alist '("zsh" . sh-mode))
+(add-to-list 'interpreter-mode-alist '("sh" . sh-mode))
+
+(defun hex-to-oneline ()
+  "Convert selected hex array (0xNN format) into a single-line hex string.
+Removes all whitespace, commas, and concatenates the hex values."
+  (interactive)
+  (when (use-region-p)
+    (let ((text (buffer-substring (region-beginning) (region-end))))
+    (with-temp-buffer
+      (insert text)
+      (goto-char (point-min))
+      ;; Remove all non-hex characters
+      (while (re-search-forward "[^0-9a-fA-Fx]" nil t)
+        (replace-match ""))
+      ;; Remove 0x prefixes (optional - keep if you want them)
+      (goto-char (point-min))
+      (while (re-search-forward "0x" nil t)
+        (replace-match ""))
+      ;; Get the result
+      (let ((result (buffer-string)))
+        (kill-new result)  ; Add to kill ring
+        (message "Converted to: %s" result))))))
