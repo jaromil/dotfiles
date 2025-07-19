@@ -8,10 +8,9 @@ SUM=sha512sum
 
 { test -r "$1" } || { print "usage: signrelease [directory|tarball]"; return 0 }
 
-target="$1"
+target="${1%/}"
 
 { test -d "$target" } && {
-
     pushd "$target"
     for i in README.md INSTALL.md ChangeLog.md AUTHORS.md KNOWN_BUGS.md TODO.md; do
 	{ test -r $i } && {
