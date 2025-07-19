@@ -46,6 +46,10 @@ shopt -s checkwinsize
 # This loads nvm bash_completion
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+# stop here on non-interactive sessions
+# fix for scp-drone and eventually others
+if [[ $- != *i* ]]; then return; fi
+
 arrow=$'\u25B6'
 c_gray='\033[01;30m'
 c_blue='\033[0;34m'
