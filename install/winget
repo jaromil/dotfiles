@@ -1,0 +1,12 @@
+#!/bin/bash
+
+winget install GnuWin32.File GnuWin32.Findutils GnuWin32.Make \
+	GnuWin32.Grep GnuWin32.Tar GnuWin32.Tree GnuWin32.Diffutils \
+	GnuWin32.Gzip GnuWin32.Unzip GnuWin32.Zip GnuWin32.Which \
+	GnuPG.GnuPG Vim.Vim direnv.direnv \
+	Dyne.CJIT Kitware.CMake Ninja-build.Ninja mesonbuild.meson \
+	Ccache.Ccache Mozilla.Sccache
+
+
+# MartinStorsjo.LLVM-MinGW.MSVCRT
+#

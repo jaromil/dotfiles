@@ -132,9 +132,9 @@ uname | grep '^MINGW' >/dev/null && {
 	}
 }
 
-# add remove-cli command for vscode when running in WSL
+# add remote-cli command for vscode when running in WSL
 # Check if VS Code server is running
-if pgrep -f "vscode-server" > /dev/null; then
+if test "`uname`" == "Linux" && pgrep -f "vscode-server" > /dev/null; then
   # Find the VS Code server directory with any hash
   vscode_server_dir=$(find ~/.vscode-server/bin \
 		                       -maxdepth 1 -type d -name "*" \
