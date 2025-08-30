@@ -44,6 +44,9 @@
 (add-hook 'prog-mode-hook #'ws-butler-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
+;; activate folding in markdown
+(add-hook 'markdown-mode-hook 'outline-minor-mode)
+
 (require 'mood-line)
 (add-to-list 'global-mode-string '(" 🐬"))
 (add-to-list 'global-mode-string '("💾%I"))
