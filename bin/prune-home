@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+
+home=${1:-$HOME}
+
+>&2 echo "Pruning $home"
+
+[ "$home" == "" ] && {
+	>&2 echo "\$HOME not found in env and no argument found"
+	exit 1
+}
+
+function rmrf() {
+	>&2 echo "delete at root:   $1 ..."
+  if [ -d "$1" ]; then
+	  rm -rf "$1"
+  fi
+}
+
+function rmrecur() {
+  >&2 echo "delete recursive: $1 ..."
+  find . -type d -name "$1" -prune -exec rm -rf '{}' +
+}
+
+cd $home
+rmrf go
+rmrf .config/nvm/versions
+rmrecur .cache
+rmrecur node_modules
+rmrecur .venv
+rmrecur go
+rmrecur mise
