@@ -79,3 +79,20 @@ alias cd.='cd $(readlink -f .)'    # Go to real dir (i.e. if current dir is link
 [ "$VSCODE_GIT_IPC_HANDLE" == "" ] && {
   command -v batcat > /dev/null && alias cat='batcat -p --theme zenburn'
 }
+
+# Setup 'code' alias for vscode local or remote
+if pgrep -f "vscode-server" > /dev/null; then
+  # Find the VS Code server directory with any hash
+  vscode_server_dir=$(find ~/.vscode-server/bin -maxdepth 1 -type d -name "*" | grep -E '/[a-f0-9]{40}$' | head -1)
+  if [ -r "$vscode_server_dir" ]; then
+    # Check if remote-cli exists
+    remote_cli_path="$vscode_server_dir/bin/remote-cli/code"
+    if [ -f "$remote_cli_path" ]; then
+      # Create the alias
+      alias code="$remote_cli_path"
+      echo "VS Code alias created: code -> $remote_cli_path"
+    fi
+  fi
+fi
+
+
