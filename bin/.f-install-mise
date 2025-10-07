@@ -1,0 +1,8 @@
+#!/bin/bash
+
+[ -r ${HOME}/.local/bin/mise ] || {
+	>&2 echo "Mise not installed in ~/.local/bin/mise"
+	exit 1
+}
+echo '"eval `mise activate bash`"' >> .envrc
+direnv allow
