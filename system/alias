@@ -96,3 +96,5 @@ if pgrep -f "vscode-server" > /dev/null; then
 fi
 
 
+# Setup the alias for continue cli
+alias deepseek="cn --config $HOME/.continue/deepseek.js"
