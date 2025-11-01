@@ -1,0 +1,11 @@
+#!/bin/bash -x
+
+set -e
+
+t=`mktemp`
+rm "$t"
+exiftool -all= -o "$t" "$1"
+mv "$1" "$1"~
+gs -o "$1" -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 "$t"
+rm -f "$t"
+
