@@ -86,7 +86,10 @@ WINUSER=`winuser`
   fi
 
   # handy aliases
-  if [ -r "${HOME}/bin/msedge.exe" ]; then alias edge='msedge.exe'; fi
+  if [ -r "${HOME}/bin/msedge.exe" ]; then
+    alias edge='msedge.exe'
+    export BROWSER="$HOME/bin/msedge.exe"
+  fi
   if [ -r "${HOME}/bin/winword.exe" ]; then alias word='winword.exe'; fi
 
   # hardcode some

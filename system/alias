@@ -97,4 +97,4 @@ fi
 
 
 # Setup the alias for continue cli
-alias deepseek="cn --config $HOME/.continue/deepseek.js"
+alias deepseek="cn --config $HOME/.continue/deepseek.yaml"
