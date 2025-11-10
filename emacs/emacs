@@ -23,6 +23,7 @@
 (require 'hl-line+)
 (toggle-hl-line-when-idle 1)
 
+(global-visual-line-mode 1)
 (editorconfig-mode)
 (cua-mode)
 (ivy-mode)
