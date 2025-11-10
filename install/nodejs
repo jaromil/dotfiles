@@ -1,6 +1,10 @@
 #!/bin/sh
 
-curl -o /tmp/nvm-install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh 
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
 PROFILE=/dev/null sh /tmp/nvm-install.sh
 
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+apt-get install -y nodejs
+node -v
