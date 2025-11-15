@@ -12,7 +12,7 @@ use_venv() {
 
 use_nvm() {
     NODE_VERSION="$1"
-    if [ "$NODE_VERSION" == "" ]; then NODE_VERSION='node'; fi
+    if [ "$NODE_VERSION" == "" ]; then export NODE_VERSION='--lts'; fi
     type nvm >/dev/null 2>&1 || . ~/.config/nvm/nvm.sh
     nvm use "$NODE_VERSION"
     tmp=`mktemp`
