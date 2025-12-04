@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+>&2 echo "This script will delete all temporary cache dirs from home."
+read -p "Do you want to continue? (y/n) " answer
+case "$answer" in
+  [Yy]* )
+    >&2 echo "Proceeding..."
+    rm -rf $HOME/.npm
+    rm -rf $HOME/.local
+    rm -rf $HOME/.cache
+    rm -rf $HOME/.config/nvm
+    rm -rf $HOME/.vscode-server
+    rm -rf $HOME/.miniconda3
+    rm -rf $HOME/.bun
+    rm -rf $HOME/go
+    find . -type d -name "node_modules" -exec rm -rf {} +
+    >&2 echo "...Done!"
+    ;;
+  [Nn]* )
+    echo "Aborting."
+    exit 1
+    ;;
+  * )
+    echo "Invalid input. Please enter y or n."
+    ;;
+esac
