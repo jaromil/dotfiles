@@ -8,16 +8,17 @@ case "$answer" in
   [Yy]* )
     >&2 echo "Proceeding..."
     empty=`mktemp -d`
-    rsync -a --delete $empty $HOME/.npm
-    rsync -a --delete $empty $HOME/.local
-    rsync -a --delete $empty $HOME/.cache
-    rsync -a --delete $empty $HOME/.config/nvm
-    rsync -a --delete $empty $HOME/.vscode-server
-    rsync -a --delete $empty $HOME/.miniconda3
-    rsync -a --delete $empty $HOME/.bun
-    rsync -a --delete $empty $HOME/go
-    find . -type d -name "node_modules" -exec rsync -a --delete $empty {} +
-    find . -type d -name "site-packages" -exec rsync -a --delete $empty {} +
+    rm -rf $HOME/.local
+    rm -rf $HOME/.config/nvm
+    rm -rf $HOME/.vscode-server
+    rm -rf $HOME/.miniconda3
+    rm -rf $HOME/.bun
+    rm -rf $HOME/go
+    find . -type d -name "cache" -prune -exec rm -rf {} +
+    find . -type d -name ".cache" -prune -exec rm -rf {} +
+    find . -type d -name ".npm" -prune -exec rm -rf {} +
+    find . -type d -name "node_modules" -prune -exec rm -rf {} +
+    find . -type d -name "site-packages" -prune -exec rm -rf {} +
     >&2 echo "...Done!"
     ;;
   [Nn]* )
