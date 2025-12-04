@@ -1,21 +1,23 @@
 #!/bin/bash
 
-set -e
+set +e
 
 >&2 echo "This script will delete all temporary cache dirs from home."
 read -p "Do you want to continue? (y/n) " answer
 case "$answer" in
   [Yy]* )
     >&2 echo "Proceeding..."
-    rm -rf $HOME/.npm
-    rm -rf $HOME/.local
-    rm -rf $HOME/.cache
-    rm -rf $HOME/.config/nvm
-    rm -rf $HOME/.vscode-server
-    rm -rf $HOME/.miniconda3
-    rm -rf $HOME/.bun
-    rm -rf $HOME/go
-    find . -type d -name "node_modules" -exec rm -rf {} +
+    empty=`mktemp -d`
+    rsync -a --delete $empty $HOME/.npm
+    rsync -a --delete $empty $HOME/.local
+    rsync -a --delete $empty $HOME/.cache
+    rsync -a --delete $empty $HOME/.config/nvm
+    rsync -a --delete $empty $HOME/.vscode-server
+    rsync -a --delete $empty $HOME/.miniconda3
+    rsync -a --delete $empty $HOME/.bun
+    rsync -a --delete $empty $HOME/go
+    find . -type d -name "node_modules" -exec rsync -a --delete $empty {} +
+    find . -type d -name "site-packages" -exec rsync -a --delete $empty {} +
     >&2 echo "...Done!"
     ;;
   [Nn]* )
