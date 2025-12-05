@@ -2,6 +2,8 @@
 
 PATH=""
 
+# pear binaries path
+if [ -r "$HOME"/.config/pear/bin ]; then prepend-path "$HOME"/.config/pear/bin; fi
 # snap binary path
 if [ -r /snap/bin ]; then prepend-path "/snap/bin"; fi
 # cosmopolitan toolchain
