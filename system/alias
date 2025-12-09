@@ -12,6 +12,7 @@ alias .path="vi $HOME/.dotfiles/system/path"
 alias .env="vi $HOME/.dotfiles/system/env"
 alias g="git status --untracked-files=no"
 alias e='emacsclient -n'
+# alias emacs='emacs -nw'
 # alias emacs='TERM=xterm-256color /usr/bin/emacs'
 
 alias .f-install-tmux="touch $HOME/.tmux_startup"

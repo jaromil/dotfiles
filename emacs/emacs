@@ -6,27 +6,30 @@
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (unless (fboundp 'package-activate-all) (package-initialize))
 
+(require 'modus-catppuccin)
+;; see own theme in the dir and blog post
+;; https://www.rahuljuliato.com/posts/modus-catppuccin
 
-;; (require 'doom-themes)
-;; (setq doom-themes-enable-bold t      ; if nil, bold is universally disabled
-;;       doom-themes-enable-italic nil) ; if nil, italics is universally disabled
-;; (load-theme 'doom-monokai-spectrum t nil)
-(load-theme 'dark-laptop t nil)
-;; complimentary theme to make magit readable
-(load-theme 'unobtrusive-magit t nil)
-;; (doom-themes-visual-bell-config)
-;; Enable custom neotree theme
-;; (doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+;; (setq catppuccin-flavor 'mocha)
+;; (load-theme 'catppuccin t)
+;; (load-theme 'unobtrusive-magit t nil)
+
 (require 'hl-line+)
 (toggle-hl-line-when-idle 1)
 
 (global-visual-line-mode 1)
 (editorconfig-mode)
+
+;; Common User Access (CUA) key bindings from other applications,
+;; enabling intuitive C-x (cut), C-c (copy), C-v (paste), and C-z
+;; (undo) when a region is active
 (cua-mode)
-(ivy-mode)
+
+;; (ivy-mode)
 (server-start)
 (menu-bar-mode -1)
 ;; (toggle-scroll-bar -1)
@@ -43,14 +46,14 @@
 (require 'rainbow-delimiters)
 (require 'ws-butler)
 ;; automatic whitespace trimming in programming modes
-(add-hook 'prog-mode-hook #'ws-butler-mode)
+; (add-hook 'prog-mode-hook #'ws-butler-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; activate folding in markdown
 (add-hook 'markdown-mode-hook 'outline-minor-mode)
 
 (require 'mood-line)
-(add-to-list 'global-mode-string '(" 🐬"))
+;; (add-to-list 'global-mode-string '("symbol"))
 (add-to-list 'global-mode-string '("💾%I"))
 (mood-line-mode)
 
@@ -166,6 +169,7 @@
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase)
 
+;; (add-hook 'after-init-hook #'global-emojify-mode)
 
 ;; unfill paragraphs to remove newlines
 (require 'unfill)

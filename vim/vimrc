@@ -10,7 +10,15 @@ set shiftwidth=4
 map <C-j> {gq}
 imap <C-j> <esc>{gq}i
 
-set noanti
+
+set pastetoggle=<F2>
+set t_BE=[200~     " Begin bracketed paste
+set t_BD=[201~     " End bracketed paste
+
+
+
+
+" set noanti
 " set number
 
 autocmd BufReadPost *

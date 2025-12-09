@@ -1,5 +1,6 @@
 #!/bin/sh
 
+if command -v apt-get >/dev/null 2>&1; then
 apt-get install emacs-nox elpa-ivy elpa-monokai-theme elpa-yaml-mode \
 		elpa-dockerfile-mode elpa-rust-mode elpa-meson-mode \
 		elpa-lua-mode elpa-smex elpa-pkg-info \
@@ -10,6 +11,20 @@ apt-get install emacs-nox elpa-ivy elpa-monokai-theme elpa-yaml-mode \
 		elpa-helm-org elpa-imenu-list pandoc elpa-ws-butler \
 		elpa-anzu elpa-flycheck elpa-s elpa-websocket elpa-notmuch \
 		elpa-magit elpa-rainbow-delimiters elpa-editorconfig \
-		editorconfig
+		elpa-modus-themes editorconfig
+elif command -v pacman >/dev/null 2>&1; then
+# Official repo packages
+pamac install --no-confirm emacs pandoc editorconfig || yay -S --noconfirm emacs pandoc editorconfig
 
+# AUR packages (Emacs extensions)
+yay -S --noconfirm \
+  emacs-ivy emacs-monokai-theme emacs-yaml-mode emacs-dockerfile-mode emacs-rust-mode \
+  emacs-meson-mode emacs-lua-mode emacs-smex emacs-pkg-info emacs-muttrc-mode \
+  emacs-markdown-mode emacs-htmlize emacs-graphviz-dot-mode emacs-folding \
+  emacs-flx emacs-flx-ido emacs-diminish emacs-csv-mode emacs-color-theme-modern \
+  emacs-browse-kill-ring emacs-bar-cursor emacs-avy emacs-helm-org emacs-imenu-list \
+  emacs-ws-butler emacs-anzu emacs-flycheck emacs-s emacs-websocket emacs-notmuch \
+  emacs-magit emacs-rainbow-delimiters emacs-editorconfig
+
+fi
 # only found in ubuntu:		elpa-darkroom elpa-doom-themes
