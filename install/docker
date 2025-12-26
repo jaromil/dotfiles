@@ -1,0 +1,63 @@
+#!/bin/sh
+
+DISTRO=${DISTRO:-`lsb_release -cs`}
+REPO=${REPO:-all}
+
+case $DISTRO in
+	beowulf|bionic)  DISTRO=buster ;;
+	chimaera|focal)  DISTRO=bullseye ;;
+	daedalus|impish) DISTRO=bookworm ;;  # bookworm ;;
+	excalibur)       DISTRO=trixie ;;
+esac
+
+>&2 echo "Target distro: $DISTRO"
+>&2 echo "Target repo: $REPO"
+>&2 echo
+
+
+>&2 echo "Install rc.local"
+cat << EOF > /etc/systemd/system/rc-local.service
+[Unit]
+ Description=/etc/rc.local Compatibility
+ ConditionPathExists=/etc/rc.local
+
+[Service]
+ Type=forking
+ ExecStart=/etc/rc.local start
+ TimeoutSec=0
+ StandardOutput=tty
+ RemainAfterExit=yes
+ SysVStartPriority=99
+
+[Install]
+ WantedBy=multi-user.target
+EOF
+
+if ! [ -r /etc/rc.local ]; then
+    printf '%s\n' '#!/bin/bash' 'exit 0' | tee -a /etc/rc.local
+fi
+chmod +x /etc/rc.local
+systemctl enable rc-local
+
+>&2 echo "Install Docker"
+keys=/usr/share/keyrings/docker-archive-keyring.gpg
+if ! [ -r $keys ]; then curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o $keys; fi
+echo "deb [arch=$(dpkg --print-architecture) signed-by=$keys] https://download.docker.com/linux/debian $DISTRO stable" \
+	> /etc/apt/sources.list.d/docker.list
+apt-get install -qy docker-ce
+cat << EOF > /etc/docker/daemon.json
+{
+  "ip": "127.0.0.1"
+}
+EOF
+systemctl restart docker
+
+>&2 echo "Install portainer"
+docker pull portainer/portainer-ee:latest
+cat << EOF
+Insert in /etc/rc.local :
+
+docker run -d -p 9000:9000 --name portainer --restart unless-stopped \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v portainer_data:/data portainer/portainer-ee:latest
+EOF
