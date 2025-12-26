@@ -57,6 +57,16 @@
 (add-to-list 'global-mode-string '("💾%I"))
 (mood-line-mode)
 
+;; Automatically reload files when they change on disk
+(global-auto-revert-mode 1)
+;; (setq auto-revert-verbose nil)      ;; don't spam the echo area
+;; (setq auto-revert-use-notify nil)   ;; fallback to polling
+;; (setq auto-revert-interval 2)       ;; check every 2 seconds
+(setq org-todo-keywords
+      '((sequence "TODO" "WIP" "DONE")))
+(setq org-todo-keyword-faces
+      '(("WIP" . (:foreground "yellow" :weight bold))))
+
 ;; nyan-mode looks better in X
 ;; (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/nyan-mode"))
 ;; (require 'nyan-mode)
