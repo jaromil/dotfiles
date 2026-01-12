@@ -10,7 +10,7 @@
 ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (unless (fboundp 'package-activate-all) (package-initialize))
 
-(require 'modus-catppuccin)
+;; (require 'modus-catppuccin)
 ;; see own theme in the dir and blog post
 ;; https://www.rahuljuliato.com/posts/modus-catppuccin
 
