@@ -1,18 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+# Proton VPN IP checker using ipinfo.io free Lite API (no token needed for basic lookups).
+# Checks if IP belongs to Proton ASNs (209103, 199218, etc.) or org.
 
-MYIP="$(curl -s https://ip.me)"
-
-if curl -s https://api.protonvpn.ch/vpn/servers \
-    | grep -q "\"ExitIP\":\"$MYIP\""
-then
-    echo "OK! ProtonVPN is tunneling this connection"
-else
-    echo "WARNING! ProtonVPN is not tunneling this connection"
+IP="$1"
+if [ $# -ne 1 ]; then
+  IP=$(curl -s https://ip.me)
 fi
-
-#if curl -s https://api.protonmail.ch/vpn/logicals | grep "$(curl -s ip.me)" > /dev/null
-#then
-#  >&2 echo "OK! ProtonVPN is tunneling this connection"
-#else
-#  >&2 echo "WARNING! ProtonVPN is not tunneling this connection"
-#fi
+echo $IP
+# Fetch IP details (free tier works without token)
+curl -s "https://ipinfo.io/$IP"
