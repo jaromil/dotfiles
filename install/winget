@@ -5,7 +5,7 @@ winget install GnuWin32.File GnuWin32.Findutils GnuWin32.Make \
 	GnuWin32.Gzip GnuWin32.Unzip GnuWin32.Zip GnuWin32.Which \
 	GnuPG.GnuPG Vim.Vim direnv.direnv \
 	Dyne.CJIT Kitware.CMake Ninja-build.Ninja mesonbuild.meson \
-	Ccache.Ccache Mozilla.Sccache
+	Ccache.Ccache Mozilla.Sccache BurntSushi.ripgrep.MSVC
 
 
 # MartinStorsjo.LLVM-MinGW.MSVCRT
