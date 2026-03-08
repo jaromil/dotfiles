@@ -131,6 +131,7 @@ uname | grep '^MINGW' >/dev/null && {
 	export PATH="$PATH:$HOME/AppData/Local/Python/bin"
 	export PATH="$PATH:/c/Program Files/nodejs:/c/Users/denis/AppData/Roaming/npm"
     export PATH="$PATH:$HOME/AppData/Local/Microsoft/WindowsApps"
+	export PATH="$PATH:$HOME/.rustup/toolchains/stable-x86_64-pc-windows-msvc/bin/"
 	found=`find_emacs_path`
 	[ "$found" == "" ] || {
 		export PATH="$PATH:`find_emacs_path`"
