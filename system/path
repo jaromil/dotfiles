@@ -52,4 +52,7 @@ prepend-path "$HOME/.local/bin"
 	eval "$(pyenv init - bash)"
 }
 
+# maestro
+[ -d "$HOME/.maestro/bin" ] && prepend-path "$HOME/.maestro/bin"
+
 export PATH
