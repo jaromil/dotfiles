@@ -45,4 +45,11 @@ prepend-path "$HOME/bin"
 prepend-path "$HOME/local/bin"
 prepend-path "$HOME/.local/bin"
 
+# pyenv
+[ -r "$HOME/.pyenv" ] && {
+	export PYENV_ROOT="$HOME/.pyenv"
+	[ -d $PYENV_ROOT/bin ] && prepend-path "$PYENV_ROOT/bin"
+	eval "$(pyenv init - bash)"
+}
+
 export PATH
