@@ -19,6 +19,7 @@ prepend-path "/usr/local/go/bin"
 prepend-path "/bin"
 prepend-path "/usr/bin"
 prepend-path "/usr/local/bin"
+prepend-path "/snap/bin"
 
 echo "$HOME" | grep termux > /dev/null && prepend-path "/data/data/com.termux/files/usr/bin"
 

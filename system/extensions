@@ -36,4 +36,8 @@ t=/usr/share/bash-completion/bash_completion; [ -r $t ] && . $t
 . $HOME/.dotfiles/completions/ssh
 
 # Python venv in ~/python
-[ -r $HOME/python ] && source $HOME/python/bin/activate
+[ -r $HOME/python ] && {
+	[ -r $HOME/python/bin/activate ] && source $HOME/python/bin/activate
+	[ -r $HOME/python/.venv/bin/activate ] && source $HOME/python/.venv/bin/activate
+}
+

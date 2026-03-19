@@ -1,0 +1,9 @@
+#!/bin/sh
+
+mkdir -p ~/python
+cd ~/python
+.f-install-venv
+direnv
+pip install -U pip setuptools wheel
+pip install requests beautifulsoup4 readability readability-lxml "chardet<6"
+
