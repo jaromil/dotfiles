@@ -11,6 +11,7 @@ alias .alias="vi $HOME/.dotfiles/system/alias"
 alias .path="vi $HOME/.dotfiles/system/path"
 alias .env="vi $HOME/.dotfiles/system/env"
 alias g="git status --untracked-files=no"
+alias gu="git up"
 alias e='emacsclient -n'
 # alias emacs='emacs -nw'
 # alias emacs='TERM=xterm-256color /usr/bin/emacs'
