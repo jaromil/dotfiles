@@ -17,6 +17,51 @@ find_emacs_path() {
 	[ -d "$found" ] && echo "$found"
 }
 
+find_vsdevcmd_path() {
+	local root
+	local path
+	for root in "/c/Program Files/Microsoft Visual Studio" \
+		"/c/Program Files (x86)/Microsoft Visual Studio"; do
+		[ -d "$root" ] || continue
+		for path in "$root"/*/*/Common7/Tools/VsDevCmd.bat; do
+			[ -r "$path" ] || continue
+			echo "$path"
+			return
+		done
+	done
+}
+
+load_vsdevcmd() {
+	[ "$VSDEVCMD_LOADED" = "1" ] && return
+	local batch_path=`find_vsdevcmd_path`
+	[ "$batch_path" = "" ] && return
+	command -v cygpath >/dev/null || return
+	local batch_win=`cygpath -w "$batch_path"`
+	local tmp=`mktemp --suffix=.cmd`
+	local env_dump
+	local path_value
+	cat <<EOF > "$tmp"
+@echo off
+set "PATH=%SystemRoot%\System32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\;%PATH%"
+call "$batch_win" >nul
+set
+EOF
+	env_dump=`/c/Windows/System32/cmd.exe //c "$(cygpath -w "$tmp")" | tr -d '\r'`
+	while IFS='=' read -r key value; do
+		case "$key" in
+		INCLUDE|LIB|LIBPATH|UCRTVersion|UniversalCRTSdkDir|VCToolsInstallDir|VCToolsRedistDir|VCINSTALLDIR|VSINSTALLDIR|VisualStudioVersion|WindowsLibPath|WindowsSdkBinPath|WindowsSdkDir|WindowsSdkVerBinPath|WindowsSDKLibVersion|WindowsSDKVersion|ExtensionSdkDir|DevEnvDir|Framework*|Platform)
+			export "$key=$value"
+			;;
+		esac
+	done <<EOF
+$env_dump
+EOF
+	rm -f "$tmp"
+	path_value=`printf '%s\n' "$env_dump" | sed -n 's/^PATH=//p' | head -n 1`
+	[ "$path_value" = "" ] || export PATH="`cygpath -up "$path_value"`"
+	export VSDEVCMD_LOADED=1
+}
+
 mkdir -p "$HOME/bin"
 
 # WSL specific: build and update an executable path to win (.exe)
@@ -137,6 +182,7 @@ uname | grep '^MINGW' >/dev/null && {
 		export PATH="$PATH:`find_emacs_path`"
 		alias emacs='emacs.exe -nw'
 	}
+	load_vsdevcmd
 }
 
 # that's all for now
