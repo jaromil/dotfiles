@@ -53,8 +53,6 @@
 (add-hook 'markdown-mode-hook 'outline-minor-mode)
 
 (require 'mood-line)
-;; (add-to-list 'global-mode-string '("symbol"))
-(add-to-list 'global-mode-string '("💾%I"))
 (mood-line-mode)
 
 ;; Automatically reload files when they change on disk
