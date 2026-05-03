@@ -192,7 +192,30 @@
 (add-to-list 'interpreter-mode-alist '("zsh" . sh-mode))
 (add-to-list 'interpreter-mode-alist '("sh" . sh-mode))
 
-(defun hex-to-oneline ()
+(when (eq system-type 'windows-nt)
+  ;; Start file dialogs and C-x C-f from the Windows user home.
+  (setq default-directory
+	(file-name-as-directory (getenv "USERPROFILE")))
+  ;; Prefer UTF-8 with Windows CRLF line endings for new files.
+  (setq-default buffer-file-coding-system 'utf-8-dos)
+  (setq shell-file-name "pwsh.exe")
+  (setq explicit-shell-file-name "pwsh.exe")
+  (setq explicit-powershell.exe-args
+    '("-NoLogo" "-NoProfile" "-ExecutionPolicy" "RemoteSigned"))
+  (setq explicit-pwsh.exe-args
+    '("-NoLogo" "-NoProfile" "-ExecutionPolicy" "RemoteSigned"))
+  (setq shell-command-switch "-Command")
+  ;; General UTF-8 setup.
+  (setenv "PYTHONIOENCODING" "utf-8")
+  (setenv "LANG" "en_US.UTF-8")
+  (prefer-coding-system 'utf-8)
+  (set-language-environment "UTF-8")
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+)
+
+(defun my/hex-to-oneline ()
   "Convert selected hex array (0xNN format) into a single-line hex string.
 Removes all whitespace, commas, and concatenates the hex values."
   (interactive)
@@ -212,3 +235,30 @@ Removes all whitespace, commas, and concatenates the hex values."
       (let ((result (buffer-string)))
         (kill-new result)  ; Add to kill ring
         (message "Converted to: %s" result))))))
+
+(defun my/toggle-justify (&optional justify)
+  "Toggle the current paragraph or active region between filled and unfilled text.
+
+When the selected text contains internal line breaks, join it into long lines
+while preserving blank-line paragraph separators. Otherwise fill it using the
+current mode's normal paragraph rules, so comments, Org items, and Markdown
+lists keep their prefixes like `fill-paragraph' does. With JUSTIFY non-nil,
+pass justification through to the fill command."
+  (interactive "P")
+  (let* ((beg (if (use-region-p)
+                  (region-beginning)
+                (save-excursion (backward-paragraph) (point))))
+         (end (if (use-region-p)
+                  (region-end)
+                (save-excursion (forward-paragraph) (point))))
+         (text (buffer-substring-no-properties beg end))
+         (has-internal-breaks (string-match-p "[^\n]\n[^\n]" text)))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region beg end)
+        (if has-internal-breaks
+            (let ((fill-column most-positive-fixnum))
+              (fill-region (point-min) (point-max) justify))
+          (fill-region (point-min) (point-max) justify))))))
+
+(global-set-key (kbd "M-Q") #'jr-toggle-fill-paragraph)
