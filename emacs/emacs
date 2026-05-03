@@ -86,6 +86,8 @@
 (setq helm-swoop-pre-input-function
       (lambda () (if (boundp 'helm-swoop-pattern)
                      helm-swoop-pattern "")))
+;; no find-files-at-point
+(when (bound-and-true-p ffap-bindings) (ffap-bindings -1))
 (require 'helm-flx)
 (setq helm-flx-for-helm-find-files t ;; t by default
       helm-flx-for-helm-locate t) ;; nil by default
