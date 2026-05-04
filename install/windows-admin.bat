@@ -12,15 +12,15 @@ if %errorlevel% neq 0 (
 echo Running with Administrator privileges.
 echo .
 echo Installing winget packages...
-winget install JFLarvoire.Ag Genivia.ugrep GnuWin32.Make GnuWin32.Tar GnuWin32.Which GNU.Emacs Microsoft.Git GitHub.cli KeePassXCTeam.KeePassXC GnuWin32.File GnuWin32.Findutils GnuWin32.Grep GnuWin32.Tree GnuWin32.Diffutils GnuWin32.Gzip GnuWin32.Unzip GnuWin32.Zip GnuPG.GnuPG direnv.direnv Dyne.CJIT Kitware.CMake Ninja-build.Ninja mesonbuild.meson Ccache.Ccache BurntSushi.ripgrep.MSVC
+winget install JFLarvoire.Ag Genivia.ugrep GnuWin32.Tar GnuWin32.Which GNU.Emacs Microsoft.Git GitHub.cli KeePassXCTeam.KeePassXC GnuWin32.File GnuWin32.Findutils GnuWin32.Grep GnuWin32.Tree GnuWin32.Diffutils GnuWin32.Gzip GnuWin32.Unzip GnuWin32.Zip GnuPG.GnuPG direnv.direnv Dyne.CJIT Kitware.CMake Ninja-build.Ninja mesonbuild.meson Ccache.Ccache BurntSushi.ripgrep.MSVC
 
 echo Setting up Windows Firewall
 call :BlockInternet "keepassxc"
 call :BlockInternet "ugrep"
 call :BlockInternet "grep"
 call :BlockInternet "ag"
-call :BlockInternet "make"
 call :BlockInternet "tar"
+call :BlockInternet "make"
 call :BlockInternet "which"
 call :BlockInternet "file"
 call :BlockInternet "find"
