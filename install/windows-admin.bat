@@ -38,6 +38,7 @@ call :BlockInternet "ninja"
 call :BlockInternet "meson"
 call :BlockInternet "ccache"
 call :BlockInternet "ripgrep"
+call :BlockInternet "pandoc"
 
 
 set "DEV=%USERPROFILE%\devel"
