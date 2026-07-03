@@ -1,0 +1,3 @@
+#!/bin/sh
+# Decode base64+zstd data from stdin (or file) back to original text.
+base64 -d ${1:+"$1"} | zstdcat
