@@ -2,7 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
@@ -82,6 +86,55 @@ def normalize_text_block(text: str) -> str:
         normalized.append(line)
         previous_blank = is_blank
     return "\n".join(normalized).strip()
+
+
+def default_output_path(url: str) -> Path:
+    """Build a stable filename from the URL using only safe ASCII characters."""
+    parsed = urlparse(url)
+    hostname = (parsed.netloc or parsed.hostname or "output").lower()
+    path = parsed.path or ""
+    query = f"_{parsed.query}" if parsed.query else ""
+    fragment = f"_{parsed.fragment}" if parsed.fragment else ""
+    raw_name = f"{hostname}{path}{query}{fragment}"
+    safe_name = re.sub(r"[^a-z0-9]+", "_", raw_name.lower()).strip("_")
+    if not safe_name:
+        safe_name = "output"
+    return Path(f"{safe_name}.txt")
+
+
+def is_pdf_response(url: str, response: requests.Response) -> bool:
+    """Detect whether the fetched resource should be treated as a PDF."""
+    content_type = response.headers.get("Content-Type", "").lower()
+    if "application/pdf" in content_type:
+        return True
+
+    content_disposition = response.headers.get("Content-Disposition", "").lower()
+    if ".pdf" in content_disposition:
+        return True
+
+    return urlparse(url).path.lower().endswith(".pdf")
+
+
+def extract_pdf_text(pdf_bytes: bytes) -> str:
+    """Convert PDF bytes to plain text with pdftotext via a temp file."""
+    if shutil.which("pdftotext") is None:
+        raise RuntimeError("pdftotext command not found")
+
+    with tempfile.TemporaryDirectory(prefix="scrape-pdf-") as temp_dir:
+        pdf_path = Path(temp_dir) / "input.pdf"
+        text_path = Path(temp_dir) / "output.txt"
+        pdf_path.write_bytes(pdf_bytes)
+        try:
+            subprocess.run(
+                ["pdftotext", str(pdf_path), str(text_path)],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as exc:
+            stderr = exc.stderr.strip() if exc.stderr else "unknown pdftotext error"
+            raise RuntimeError(f"pdftotext failed: {stderr}") from exc
+        return text_path.read_text(encoding="utf-8")
 
 
 def parse_hacker_news_comments(html: str) -> tuple[str, list[HackerNewsComment]]:
@@ -168,9 +221,9 @@ DOMAIN_FILTERS["news.ycombinator.com"] = filter_hacker_news
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Fetch a webpage and print extracted plain text.")
+    parser = argparse.ArgumentParser(description="Fetch a webpage and save extracted plain text.")
     parser.add_argument("url", nargs="?", help="URL to fetch")
-    parser.add_argument("-o", "--output", type=Path, help="Optional output file path (written as UTF-8)")
+    parser.add_argument("-o", "--output", type=Path, help="Output file path (written as UTF-8)")
     parser.add_argument("--timeout", type=float, default=30.0, help="HTTP timeout in seconds (default: 30)")
     return parser
 
@@ -193,7 +246,10 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     try:
-        text = apply_domain_filter(args.url, response.text, extract_text(response.text))
+        if is_pdf_response(args.url, response):
+            text = extract_pdf_text(response.content)
+        else:
+            text = apply_domain_filter(args.url, response.text, extract_text(response.text))
     except Exception as exc:
         print(f"Error: text extraction failed: {exc}", file=sys.stderr)
         return 2
@@ -202,11 +258,9 @@ def main(argv: list[str] | None = None) -> int:
         print("Error: no text extracted", file=sys.stderr)
         return 3
 
-    if args.output is not None:
-        args.output.write_text(text, encoding="utf-8")
-    else:
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-        print(text)
+    output_path = args.output or default_output_path(args.url)
+    output_path.write_text(text, encoding="utf-8")
+    print(output_path)
     return 0
 
 
