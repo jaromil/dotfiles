@@ -1,4 +1,8 @@
 #!/bin/sh
-# Compress stdin (or file) with zstd and base64-encode for copy-paste.
-zstd --stdout -q ${1:+"$1"} | base64 -w0
+set -e
+if [ $# -eq 0 ]; then
+    zstd -9 --stdout -q | base64 -w0
+else
+    tar cf - "$@" | zstd -9 --stdout -q | base64 -w0
+fi
 echo

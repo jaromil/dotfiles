@@ -1,3 +1,14 @@
 #!/bin/sh
-# Decode base64+zstd data from stdin (or file) back to original text.
-base64 -d ${1:+"$1"} | zstdcat
+set -e
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+if [ $# -gt 0 ]; then
+    base64 -d "$1" | zstdcat > "$tmp"
+else
+    base64 -d | zstdcat > "$tmp"
+fi
+if tar tf "$tmp" >/dev/null 2>&1; then
+    tar xf "$tmp"
+else
+    cat "$tmp"
+fi
