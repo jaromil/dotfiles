@@ -15,7 +15,9 @@ if [ -x /opt/cosmos ]; then prepend-path "/opt/cosmos/bin"; fi
 # language frameworks
 [ -x ~/.cargo ] && prepend-path "$HOME/.cargo/bin"
 [ -x ~/.go ] && prepend-path "$HOME/go/bin"
-prepend-path "/usr/local/go/bin"
+[ -x ~/miniforge3 ] && prepend-path "$HOME/miniforge3/bin"
+[ -x /usr/local/go ] && prepend-path "/usr/local/go/bin"
+[ -x ~/.wasmtime ] && prepend-path "$HOME/.wasmtime/bin"
 
 # distro's bin paths
 prepend-path "/bin"
