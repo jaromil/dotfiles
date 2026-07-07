@@ -1,24 +1,26 @@
 #!/bin/sh
 
+set -e 
+
 [ -x /usr/bin/pi ] || sudo npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 
 # Bundle extensions, skills, prompts, and themes as packages.
 # pi install npm:@foo/pi-tools
-cd $HOME
-
 # studio web ui
 pi install npm:pi-studio
 
 # total recall
-# pi install @samfp/pi-memory
-# pi install pi-session-search
+pi install npm:@samfp/pi-memory
+pi install npm:pi-session-search
 # pi install pi-knowledge-search
 
 # superpowers-plus
-pi install npm:pi-superpowers-plus
+pi install npm:pi-superpowers
 
 # hypa for context saving
-curl -fsSL https://hypabolic.github.io/Hypa/install.sh | sudo bash
+command -v hypa || curl -fsSL https://hypabolic.github.io/Hypa/install.sh | sudo bash
 pi install npm:@hypabolic/pi-hypa
 
-cd -
+pi list
+echo "Success"
+
