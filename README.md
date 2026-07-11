@@ -1,203 +1,182 @@
 # Jaromil's dotfiles
 
-This setup is based on the Bash shell and includes configurations for git, emacs, vim, direnv. In addition there is also a set of handy shell scripts and a level of integration with WSL host (Windows Subsystem for Linux).
+Personal dotfiles and bootstrap scripts for a Unix-like working environment. The setup is centered on Bash/Zsh shells and includes configuration for Git, Vim, Emacs, tmux, direnv, fzf, WSL/Windows integration, and a collection of small command-line helpers.
 
-Quick Install:
+> **Warning:** this repository is meant to be installed as `~/.dotfiles`. Running `make setup` creates symlinks in your home directory and may move existing dotfiles aside as `*.bck` backups.
 
-```
+## Quick install
+
+```sh
 curl -L https://jaromil.dyne.org/dotfiles.sh | sh
+cd ~/.dotfiles
+make setup
 ```
 
-Will install into `~/.dotfiles`
+The bootstrap script installs this repository into `~/.dotfiles` using `git`, `curl`, or `wget`, depending on what is available.
 
-Go inside this directory and type `make` for a list of options.
+## What `make setup` does
 
-Do `make setup` to activate, beware it will overwrite some dotfiles:
-- ~/.gitconfig && ~/.gitignore
-- ~/.bashrc && ~/.inputrc
-- ~/.emacs && ~/.vimrc
-- ~/.editorconfig
-- ~/.signature
-- ~/.direnvrc
+`make setup` symlinks files from this repository into the parent home directory. Existing non-symlink files are copied to `*.bck` before being replaced.
 
+Managed files include:
 
-## Windows native
+- `~/.bashrc`, `~/.zshrc`, `~/.inputrc`
+- `~/.gitconfig`, `~/.gitignore`
+- `~/.vimrc`, `~/.emacs`
+- `~/.editorconfig`, `~/.direnvrc`, `~/.signature`, `~/.tmux.conf`, and related files from `misc/`
 
-Install [Git for Windows](https://gitforwindows.org/) and launch its shell.
+It also creates `~/.zsh_local` and `~/.hushlogin` if missing.
 
-Install GNU Make, dotfiles and run make with full path:
+## Repository layout
+
+| Path | Purpose |
+| --- | --- |
+| `GNUmakefile` | Home-directory symlink setup. |
+| `dotfiles.sh` | One-shot remote bootstrap installer. |
+| `loader.sh` | Shared shell loader used by Bash and Zsh startup files. |
+| `shell/` | Shell entrypoints: `bashrc`, `zshrc`, `inputrc`. |
+| `system/` | Shared shell functions, aliases, environment, path setup, prompt, platform helpers, and completions/extensions. |
+| `bin/` | User helper scripts added to `PATH`. |
+| `install/` | Optional system/package installation recipes. Many require root. |
+| `git/` | Global Git config and ignore rules. |
+| `vim/` | Vim configuration. |
+| `emacs/` | Emacs configuration and bundled Lisp packages/themes. |
+| `misc/` | tmux, direnv, editorconfig, gdb, signature, and other miscellaneous dotfiles. |
+| `completions/` | Shell completions for fzf, Git, SSH, ZFS, etc. |
+| `themes/` | tmux/Nord theme support files. |
+| `confs/` | System configuration snippets. |
+
+## Shell startup model
+
+`~/.bashrc` and `~/.zshrc` source `~/.dotfiles/loader.sh`. The loader:
+
+1. exits early for non-interactive shells,
+2. prepends `~/.dotfiles/bin` to `PATH`,
+3. sources files in `system/` in this order:
+   - `function`
+   - `function_*`
+   - `path`
+   - `env`
+   - `alias`
+   - `windows`
+   - `prompt`
+   - `extensions`
+   - `jumptable`
+4. sources `shell/inputrc`,
+5. sources `~/.rclocal` when present,
+6. configures `dircolors` or BSD/Darwin `ls` behavior.
+
+Use local override files for machine-specific or private customizations:
+
+- `~/.rclocal` — loaded by `loader.sh`.
+- `~/.bash_local` and `~/.bashrc.local` — loaded by `shell/bashrc`.
+- `~/.zsh_local` — loaded by `shell/zshrc`.
+- `~/.tmux_startup` — enables auto-starting tmux over SSH from Bash.
+- `~/.motd` — displayed by Bash login startup when present.
+
+Do not commit secrets or host-specific credentials; keep them in local override files.
+
+## Install recipes
+
+The `install/` directory contains optional setup scripts. These are intentionally separate from `make setup`. Many are designed for Debian/Devuan-like systems and several require root privileges.
+
+Examples:
+
+```sh
+sudo ./install/apt       # base APT packages
+sudo ./install/devtools  # compilers, build tools, editorconfig, act
+sudo ./install/devops    # repository setup for Docker/HashiCorp/Kubernetes tools
+sudo ./install/docker    # Docker-related setup
+sudo ./install/firewall  # basic firewall setup
+sudo ./install/nodejs    # nvm, NodeSource Node.js, Bun
+sudo ./install/rust      # Rust toolchain setup
+sudo ./install/pi.dev    # Pi coding-agent ecosystem tools and packages
 ```
+
+Other recipes cover Emacs, LaTeX, Python, Neovim, VS Code, WezTerm, ZFS, FreeBSD/OpenBSD base setup, Windows/winget helpers, SSH key generation, locale, locate, and systemd rc-local support.
+
+Read a script before running it. These scripts may install packages, add package repositories, change system configuration, or require elevated permissions.
+
+## Helper scripts
+
+Files under `bin/` are added to `PATH` by `loader.sh`. Notable helpers include:
+
+- `adduser-remote` / `shuriken` — generate a remote user + SSH key setup script.
+- `anon-pdf` — PDF anonymization helper.
+- `clean-home-temp` and `prune-home` — home-directory cleanup helpers.
+- `hcloud-datacenters` — list Hetzner datacenters for `hcloud` usage.
+- `lnxrouter` — activate NAT masquerading from the current host.
+- `mladmin` — open a Dyne.org Mailman administration page.
+- `my-ip`, `proton-test`, `tor-test` — network/VPN/Tor IP checks.
+- `prune-branches` — Git branch cleanup helper.
+- `rd-rm-results` — `rdfind` duplicate-removal helper for `results.txt`.
+- `signrelease` — release signing helper.
+- `tile-goldratio` — minimal golden-ratio window tiling helper using `wmctrl`/similar tools.
+- `torrent-serve` — serve files in the current directory for LAN streaming.
+- `zcopy` and `zpaste` — clipboard-oriented helpers.
+- `.f-install-readme`, `.f-install-nvm`, `.f-install-mise`, `.f-install-venv` — project-local setup helpers used from the shell.
+
+## Git configuration
+
+The repository installs a global Git config with:
+
+- Vim as the default editor,
+- colorized output,
+- fast-forward-only merge behavior,
+- rebase-oriented pull settings,
+- convenient aliases such as `git st`, `git up`, `git br`, `git hist`, `git lg`, and `git storia`,
+- `main` as the default branch name for new repositories.
+
+Review `git/gitconfig` before using it on machines where global identity or workflow settings differ.
+
+## Windows and WSL
+
+The setup includes WSL-aware shell integration in `system/windows` and native Windows helper scripts under `install/`:
+
+- `install/windows-user.bat`
+- `install/windows-admin.bat`
+- `install/windows-msvc-env.ps1`
+- `install/winget`
+
+For native Git for Windows usage:
+
+```sh
 winget install gnuwin32.make
 winget install direnv.direnv
 curl https://jaromil.dyne.org/dotfiles.sh | sh
 cd .dotfiles
-"C:\Program Files (x86)\GnuWin32\bin\make.exe"
+"C:\Program Files (x86)\GnuWin32\bin\make.exe" setup
 ```
 
-Get out and then open the Git shell again.
+Restart the Git shell after setup.
 
-## Cheat-sheet
+## Emacs notes
 
-[![image](https://github.com/user-attachments/assets/c142e937-99ec-4058-9b40-4f0ba4274495)](https://cheatography.com/jaromil/cheat-sheets/jaromil-s-dotfiles/#downloads)
-
-
-## Install recipes
-
-These scripts will auto-install commonly used setups on various distros, they need running are root (at your own risk!)
-
-- `./install/apt`      Install base distro packages on APT distros
-- `./install/devops`   Install devops tools: docker, terraform
-- `./install/devtools`  Install development tools: make, gcc, lua-dev..
-- `./install/firewall`  Install basic ufw firewall protection allowing only ssh
-- `install-emacs`    Install emacs packages
-- `install-latex`    Install latex packages
-- `install-nodejs`   Install nodejs tools
-- `install-winhost`  Copy WSL dotfiles to the Windows host user dir
-
-## Shell scripts
-
-These scripts are into the `.dotfiles/bin` and added to `$PATH` hence available from commandline:
-
-- `tile-goldratio` :: minimal windowmanager tiling script using wmctl
-- `rd-rm-results` :: rdfind helper to remove duplicate hits in results.txt
-- `lnxrouter` :: shell script to activate NAT masq from current host
-- `adduser-remote` :: generates script to quickly add a user and ssh key
-- `mladmin` :: quickly opens the admin panel of a dyne.org mailinglist
-- `hcloud-datacenters` :: list all hetzner datacenters for hcloud-cli
-- `torrent-serve` :: serve files in current directory for LAN streaming
-- `.f-install-readme` :: install direnv README.nfo in current dir
-- `.f-install-nvm` :: install a NodeVM setup in current dir
-
-## Emacs
-
-The setup uses helm heavily (even swoop in place of find-file) supports golang and has support for spell-checker hunspell and english grammar-checker grammarly.
-
-Keys are remapped for my confort as follows:
+The Emacs setup uses Helm heavily, with support for Go, spell checking through Hunspell, and grammar checking through Grammarly-related packages. Some custom keybindings include:
 
 ```elisp
-
-(global-unset-key [(control x)(control z)])
 (global-set-key (kbd "M-x") 'helm-M-x)
-;; M-a in qwerty is soft on left hand and I use it also in tmux
-(global-set-key (kbd "M-a") 'helm-M-x) ;; this overrides an ugly lowercase hotkey
-(global-set-key (kbd "M-k") 'kill-buffer) ;; I'm not using it to delete lower block
+(global-set-key (kbd "M-a") 'helm-M-x)
+(global-set-key (kbd "M-k") 'kill-buffer)
 (global-set-key (kbd "M-i") 'helm-imenu)
 (global-set-key (kbd "M-,") 'helm-ag-project-root)
 (global-set-key (kbd "M-.") 'helm-ag)
 (global-set-key (kbd "C-x g") 'magit)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "M-o") 'helm-occur)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-s") 'helm-swoop)
-(global-set-key (kbd "M-s M-s") 'helm-multi-swoop-all)
-
-;; because I'm sloppy
-(global-set-key (kbd "C-o") 'helm-find-files)
-(global-set-key (kbd "C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-(global-set-key (kbd "M-p") 'helm-buffers-list) ;; right ha
-
-(global-unset-key (kbd "M-c")) ;; sloppy and not useful
-
 ```
 
+See `emacs/emacs` for the full configuration.
 
-## Code layout
+## Cheat sheet
 
-At shell startup the loader.sh is sourced to load all scripts in `system/` and then the shell specific one in `shell/`.
+[![Jaromil's dotfiles cheat sheet](https://github.com/user-attachments/assets/c142e937-99ec-4058-9b40-4f0ba4274495)](https://cheatography.com/jaromil/cheat-sheets/jaromil-s-dotfiles/#downloads)
 
-The `install/` dir contains collections of package install scripts.
+## Development notes
 
-```
-.
-├── bin
-│   ├── adduser-remote
-│   ├── hcloud-datacenters
-│   ├── lnxrouter
-│   ├── mladmin
-│   ├── prune-branches
-│   ├── rd-rm-results
-│   ├── shuriken -> adduser-remote
-│   ├── tile-goldratio
-│   └── torrent-serve
-├── completions
-│   ├── fzf
-│   ├── git
-│   ├── ssh
-│   └── zfs
-├── confs
-│   └── always-on_logind.conf
-├── dotfiles.sh
-├── emacs
-│   ├── doom-themes-base.el
-│   ├── doom-themes.el
-│   ├── emacs
-│   ├── flycheck-grammarly.el
-│   ├── go-mode.el
-│   ├── grammarly.el
-│   ├── helm-ag.el
-│   ├── helm-flx.el
-│   ├── helm-swoop.el
-│   ├── mood-line.el
-│   ├── rainbow-delimiters.el
-│   ├── request-deferred.el
-│   ├── request.el
-│   ├── themes
-│   ├── unfill.el
-│   └── ws-butler.el
-├── git
-│   ├── gitconfig
-│   └── gitignore
-├── GNUmakefile
-├── install
-│   ├── apt
-│   ├── cloudflared
-│   ├── devops
-│   ├── devtools
-│   ├── emacs
-│   ├── firewall
-│   ├── freebsd-base
-│   ├── keygen-ssh-root-and-user
-│   ├── latex
-│   ├── locale
-│   ├── locate
-│   ├── need-suid.sh
-│   ├── need-username.sh
-│   ├── neovim
-│   ├── nodejs
-│   ├── openbsd-base
-│   ├── rust
-│   ├── sudo
-│   ├── systemd-rc-local
-│   ├── vscode
-│   ├── wezterm
-│   ├── winhost
-│   └── zfs
-├── loader.sh
-├── misc
-│   ├── direnvrc
-│   ├── editorconfig
-│   ├── nord-tmux
-│   ├── signature
-│   └── tmux.conf
-├── README.md
-├── shell
-│   ├── bashrc
-│   ├── inputrc
-│   └── zshrc
-├── system
-│   ├── alias
-│   ├── dir_colors
-│   ├── env
-│   ├── extensions
-│   ├── function
-│   ├── function_fs
-│   ├── function_network
-│   ├── function_text
-│   ├── onedrive
-│   ├── path
-│   ├── prompt
-│   └── startmenu
-└── vim
-    └── vimrc
-```
+- Keep shell snippets portable unless a file already declares Bash.
+- Guard optional integrations with checks such as `command -v`, `[ -r file ]`, or `[ -x dir ]`.
+- Prefer idempotent install/setup behavior.
+- Avoid committing generated caches, backups, secrets, or machine-local configuration.
+- For agent-specific repository guidance, see `AGENTS.md`.
