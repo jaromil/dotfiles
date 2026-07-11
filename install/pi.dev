@@ -26,6 +26,17 @@ pi install npm:pi-session-search
 # superpowers
 pi install npm:pi-superpowers
 
+mkdir -p ~/.pi/agent
+cat << EOF > ~/.pi/agent/mcp.json
+{
+  "mcpServers": {
+    "context-mode": {
+      "command": "context-mode"
+    }
+  }
+}
+EOF
+
 pi list
 echo "Success"
 
