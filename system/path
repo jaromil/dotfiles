@@ -18,6 +18,8 @@ if [ -x /opt/cosmos ]; then prepend-path "/opt/cosmos/bin"; fi
 [ -x ~/miniforge3 ] && prepend-path "$HOME/miniforge3/bin"
 [ -x /usr/local/go ] && prepend-path "/usr/local/go/bin"
 [ -x ~/.wasmtime ] && prepend-path "$HOME/.wasmtime/bin"
+[ -x ~/.bun ] && prepend-path "$HOME/.bun/bin"
+
 
 # distro's bin paths
 prepend-path "/bin"

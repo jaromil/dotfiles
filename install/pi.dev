@@ -3,23 +3,28 @@
 set -e 
 
 [ -x /usr/bin/pi ] || sudo npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+command -v context-mode || sudo npm install -g context-mode
+command -v hypa || curl -fsSL https://hypabolic.github.io/Hypa/install.sh | sudo bash
 
 # Bundle extensions, skills, prompts, and themes as packages.
 # pi install npm:@foo/pi-tools
+
+# context-mode
+pi install npm:context-mode
+
+# hypa for context saving
+pi install npm:@hypabolic/pi-hypa
+
 # studio web ui
 pi install npm:pi-studio
 
-# total recall
+# memory from total recall
 pi install npm:@samfp/pi-memory
 pi install npm:pi-session-search
 # pi install pi-knowledge-search
 
-# superpowers-plus
+# superpowers
 pi install npm:pi-superpowers
-
-# hypa for context saving
-command -v hypa || curl -fsSL https://hypabolic.github.io/Hypa/install.sh | sudo bash
-pi install npm:@hypabolic/pi-hypa
 
 pi list
 echo "Success"
