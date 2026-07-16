@@ -1,0 +1,12 @@
+#!/bin/bash
+src="$1"
+dst="$2"
+usage="codex-profile-clone source-profile new-profile"
+[ -z $src ] && { >&2 echo "$usage"; exit 1 }
+[ -z $dst ] && { >&2 echo "$usage"; exit 1 }
+codex-profile clone-config $src $dst
+eval `codex-profile env $dst`
+codex-profile cli $dst plugin marketplace add dyne/agent-plugins
+codex-profile cli $dst plugin marketplace upgrade
+codex-profile cli $dst plugin add org-plan@dyne-agent-plugins
+codex-profile cli $dst plugin add superpowers@dyne-agent-plugins
