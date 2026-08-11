@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (C) 2017-2022 Dyne.org Foundation
+# Copyright (C) 2017-2026 Dyne.org Foundation
 #
 # designed, written and maintained by Denis Roio <jaromil@dyne.org>
 #
@@ -69,4 +69,3 @@ else
     cat $tmp
 fi
 rm -f $tmp
-
