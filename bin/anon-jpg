@@ -1,0 +1,24 @@
+#!/bin/sh
+# usage: ./webjpg.sh input.jpg [output.jpg]
+
+cmd=convert
+command -v magick && cmd=magick
+[ "$1" = "" ] && {
+  >&2 echo "usage: anon-jpg picture-input"
+  exit 1
+}
+
+in="$1"
+out="${2:-${in%.*}-web.jpg}"
+
+$cmd "$in" \
+  -auto-orient \
+  -strip \
+  -colorspace sRGB \
+  -sampling-factor 4:2:0 \
+  -quality 82 \
+  -interlace Plane \
+  -define jpeg:optimize-coding=true \
+  "$out"
+
+printf '%s\n' "$out"
