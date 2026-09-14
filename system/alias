@@ -103,4 +103,5 @@ if uname | grep -v '^MINGW' > /dev/null; then
 fi
 
 # Setup the alias for continue cli
-alias deepseek="cn --config $HOME/.continue/deepseek.yaml"
+#alias deepseek="cn --config $HOME/.continue/deepseek.yaml"
+[ -r ~/.local_aliases ] && . ~/.local_aliases
