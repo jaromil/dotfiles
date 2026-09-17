@@ -1,11 +1,25 @@
-#!/bin/bash -x
+#!/bin/bash
 
-set -e
+set -euo pipefail
 
-t=`mktemp`
-rm "$t"
-exiftool -all= -o "$t" "$1"
-mv "$1" "$1"~
-gs -o "$1" -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 "$t"
-rm -f "$t"
+if (( $# != 1 )); then
+	echo "Usage: ${0##*/} PDF" >&2
+	exit 2
+fi
 
+input=$1
+tmpdir=$(mktemp -d)
+trap 'rm -rf -- "$tmpdir"' EXIT
+
+if ! exiftool -all= -o "${tmpdir}/stripped.pdf" "${input}"; then
+	echo "ExifTool could not read the PDF; repairing it with qpdf." >&2
+	rm -f -- "${tmpdir}/stripped.pdf"
+	qpdf --warning-exit-0 "${input}" "${tmpdir}/repaired.pdf"
+	exiftool -all= -o "${tmpdir}/stripped.pdf" "${tmpdir}/repaired.pdf"
+fi
+
+gs -o "${tmpdir}/anonymous.pdf" -sDEVICE=pdfwrite \
+	-dCompatibilityLevel=1.4 "${tmpdir}/stripped.pdf"
+
+mv -- "${input}" "${input}"~
+mv -- "${tmpdir}/anonymous.pdf" "${input}"
